@@ -4,7 +4,7 @@ const am = require('../middlewares/async-middleware');
 
 const router = express.Router();
 
-router.post('/',am(notificationController.create))
-router.delete('/:id',am(notificationController.destroy))
+// router.post('/',am(notificationController.create))
+// router.delete('/:id',am(notificationController.destroy))
 
 export default router;
