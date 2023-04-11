@@ -1,13 +1,16 @@
-import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional } from 'sequelize';
+import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional, ForeignKey } from 'sequelize';
 import db from "../configs/db/db";
 import Constants from '../utils/constants';
+import Merchant from './merchant-model';
 
 class MerchantWalletModel extends Model<InferAttributes<MerchantWalletModel>, InferCreationAttributes<MerchantWalletModel>> {
     declare id: CreationOptional<string>
     declare pg_balance: number
     declare balance: number
     declare hold_balance: number
+    
     declare status: string
+    declare merchant_id : ForeignKey<Merchant['id']>
 }
 
 MerchantWalletModel.init({
@@ -30,7 +33,7 @@ MerchantWalletModel.init({
         allowNull: false
     },
     status: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         values: [Constants.STATUS.ENABLE, Constants.STATUS.DISABLE, Constants.STATUS.FREEZ],
         defaultValue: Constants.STATUS.ENABLE
     }

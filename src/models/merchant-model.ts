@@ -3,6 +3,7 @@ import db from "../configs/db/db";
 import bcrypt from 'bcrypt';
 import Otp from './otp-model';
 import Constants from '../utils/constants';
+import MerchantWalletModel from './merchant-wallet';
 
 class Merchant extends Model<InferAttributes<Merchant>,InferCreationAttributes<Merchant>>{
 
@@ -104,5 +105,7 @@ Merchant.beforeCreate((user)=>{
 
 
 Merchant.hasMany(Otp,{sourceKey:'id',foreignKey:'merchant_id',as:'otps'});
+
+Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:'wallet'});
 
 export default Merchant
