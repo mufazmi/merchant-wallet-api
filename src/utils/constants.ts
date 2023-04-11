@@ -32,6 +32,12 @@ class Constants {
       FORGOT_PASSWORD: 'forgot_password'
    }
 
+   static STATUS = {
+      ENABLE: 'enable',
+      DISABLE: 'disable',
+      FREEZ:'freez'
+   }
+
    static TYPE = {
       KYC_PENDING: 'kyc_pending',
       KYC_SUBMITTED: 'kyc_submitted',
