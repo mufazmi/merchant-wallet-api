@@ -3,6 +3,7 @@ import db from "../configs/db/db";
 import bcrypt from 'bcrypt';
 import Otp from './otp-model';
 import Constants from '../utils/constants';
+import MerchantFundModel from './merchant-funds';
 
 class Admin extends Model<InferAttributes<Admin>,InferCreationAttributes<Admin>>{
 
@@ -85,7 +86,8 @@ Admin.beforeCreate((user)=>{
     user.password = bcrypt.hashSync(user.password,salt);
 })
 
-
 Admin.hasMany(Otp,{sourceKey:'id',foreignKey:'user_id',as:'otps'});
+
+Admin.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'approved_by',as:'merchant_funds'});
 
 export default Admin

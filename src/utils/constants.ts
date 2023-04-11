@@ -35,7 +35,10 @@ class Constants {
    static STATUS = {
       ENABLE: 'enable',
       DISABLE: 'disable',
-      FREEZ:'freez'
+      FREEZ:'freez',
+      APPROVED:'approved',
+      PENDING:'pending',
+      REJECTED:'rejected',
    }
 
    static TYPE = {
