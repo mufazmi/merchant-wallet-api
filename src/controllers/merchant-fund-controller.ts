@@ -23,25 +23,7 @@ class MerchantFundController {
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await merchantFundService.findAll({});
-        return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MERCHANT.FUND_MERCHANT_NOT_FOUND));
-    }
-
-    update = async (req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
-        const body = await merchantFundValidation.update.validateAsync(req.body);
-        const template = await merchantFundService.findOne({ id });
-        if (!template)
-            return next(ErrorHandler.notFound(Messages.MERCHANT.FUND_MERCHANT_NOT_FOUND))
-
-        const data = await merchantFundService.update({ id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_UPDATED }) : next(ErrorHandler.serverError(Messages.MERCHANT.FUND_MERCHANT_UPDATE_FAILED));
-    }
-
-
-    destroy = async (req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
-        const data = await merchantFundService.destroy({ id });
-        return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_DELATED }) : next(ErrorHandler.notFound(Messages.MERCHANT.FUND_MERCHANT_DELETE_FAILED));
+        return data.length > 1 ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MERCHANT.FUND_MERCHANT_NOT_FOUND));
     }
 }
 

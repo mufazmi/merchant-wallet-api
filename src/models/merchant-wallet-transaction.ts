@@ -62,7 +62,7 @@ MerchantWalletTransactionModel.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: [Constants.TRANSACTION.STATUS_SUCCESS, Constants.TRANSACTION.STATUS_SUCCESS],
+        values: [Constants.TRANSACTION.STATUS_SUCCESS, Constants.TRANSACTION.STATUS_FAILED],
         allowNull: false
     }
 }, {

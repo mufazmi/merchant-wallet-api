@@ -24,7 +24,7 @@ class MessageTemplateController {
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await messageTemplateService.findAll({});
-        return data ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
+        return data.length > 1 ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
