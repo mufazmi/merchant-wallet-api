@@ -9,7 +9,10 @@ import merchantFundService from "../services/merchant-fund-service";
 class MerchantFundController {
 
     create = async (req: Request, res: Response, next: NextFunction) => {
+        //@ts-ignore
+        const id = req.merchant.id;
         const body = await merchantFundValidation.create.validateAsync(req.body);
+        body.merchant_id = id
         const data = await merchantFundService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_CREATED }) : next(ErrorHandler.serverError(Messages.MERCHANT.FUND_MERCHANT_CREATION_FAILED));
     }

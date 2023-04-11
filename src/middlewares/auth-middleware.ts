@@ -23,7 +23,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
         if (!tokenUser)
             return next(ErrorHandler.forbidden("Access Expired"))
         //@ts-ignore
-        req.admin = tokenService
+        req.merchant = tokenUser
 
     }
     catch (e) {
@@ -39,9 +39,10 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
             if (!token)
                 return ErrorHandler.forbidden("Access Expired")
 
-            console.log(token);
-
+            return next(ErrorHandler.forbidden("Unauthorized Access!"))
         }
+
+        return next(ErrorHandler.forbidden("Please Login First"))
     }
 
     return next();

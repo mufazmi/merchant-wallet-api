@@ -16,7 +16,7 @@ import auth from '../middlewares/auth-middleware';
 
 router.use('/auth', merchantAuthRoute);
 router.use('/fund', merchantFundRoute);
-router.use('/transaction', merchantWalletTransactionRoute);
+router.use('/transaction', auth,merchantWalletTransactionRoute);
 router.use('/message/template', messageTemplateRoute);
 router.use('/country', countryRoute);
 // router.use('/state', stateRoute);
