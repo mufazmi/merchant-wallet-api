@@ -5,7 +5,6 @@ import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import merchantFundService from "../services/merchant-fund-service";
 
-
 class MerchantFundController {
 
     create = async (req: Request, res: Response, next: NextFunction) => {
