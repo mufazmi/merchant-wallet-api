@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../configs/db/db"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const otp_model_1 = __importDefault(require("./otp-model"));
 const constants_1 = __importDefault(require("../utils/constants"));
 const merchant_wallet_1 = __importDefault(require("./merchant-wallet"));
@@ -80,12 +80,12 @@ Merchant.init({
     freezeTableName: true,
     sequelize: db_1.default
 });
-const salt = bcrypt_1.default.genSaltSync(3, 'a');
-let password = bcrypt_1.default.hashSync('password', salt);
+const salt = bcryptjs_1.default.genSaltSync(3);
+let password = bcryptjs_1.default.hashSync('password', salt);
 console.log({ password });
 Merchant.beforeCreate((user) => {
-    const salt = bcrypt_1.default.genSaltSync(3, 'a');
-    user.password = bcrypt_1.default.hashSync(user.password, salt);
+    const salt = bcryptjs_1.default.genSaltSync(3);
+    user.password = bcryptjs_1.default.hashSync(user.password, salt);
 });
 Merchant.hasMany(otp_model_1.default, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'otps' });
 Merchant.hasOne(merchant_wallet_1.default, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'wallet' });

@@ -1,6 +1,6 @@
 import Merchant from "../models/merchant-model"
 import { InferCreationAttributes, InferAttributes } from 'sequelize';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 class MerchantService{
 

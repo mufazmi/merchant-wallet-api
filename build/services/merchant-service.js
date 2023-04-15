@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const merchant_model_1 = __importDefault(require("../models/merchant-model"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class MerchantService {
     constructor() {
         this.createMerchant = (data) => __awaiter(this, void 0, void 0, function* () { return yield merchant_model_1.default.create(data); });
         this.findMerchant = (filter) => __awaiter(this, void 0, void 0, function* () { return yield merchant_model_1.default.findOne({ where: filter }); });
         this.updateMerchant = (filter, data) => __awaiter(this, void 0, void 0, function* () { return yield merchant_model_1.default.update(data, { where: filter }); });
         this.verifyPassword = (plane, hash) => {
-            const isPasswordMatched = bcrypt_1.default.compareSync(plane, hash);
+            const isPasswordMatched = bcryptjs_1.default.compareSync(plane, hash);
             console.log({ isPasswordMatched });
             return isPasswordMatched;
         };

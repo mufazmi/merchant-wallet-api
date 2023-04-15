@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../configs/db/db"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const otp_model_1 = __importDefault(require("./otp-model"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const constants_1 = __importDefault(require("../utils/constants"));
 const merchant_funds_1 = __importDefault(require("./merchant-funds"));
 class Admin extends sequelize_1.Model {
@@ -64,12 +64,12 @@ Admin.init({
     freezeTableName: true,
     sequelize: db_1.default
 });
-const salt = bcrypt_1.default.genSaltSync(3, 'a');
-let password = bcrypt_1.default.hashSync('password', salt);
+const salt = bcryptjs_1.default.genSaltSync(3);
+let password = bcryptjs_1.default.hashSync('password', salt);
 console.log({ password });
 Admin.beforeCreate((user) => {
-    const salt = bcrypt_1.default.genSaltSync(3, 'a');
-    user.password = bcrypt_1.default.hashSync(user.password, salt);
+    const salt = bcryptjs_1.default.genSaltSync(3);
+    user.password = bcryptjs_1.default.hashSync(user.password, salt);
 });
 Admin.hasMany(otp_model_1.default, { sourceKey: 'id', foreignKey: 'user_id', as: 'otps' });
 Admin.hasMany(merchant_funds_1.default, { sourceKey: 'id', foreignKey: 'approved_by', as: 'merchant_funds' });

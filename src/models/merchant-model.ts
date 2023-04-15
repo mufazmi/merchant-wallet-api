@@ -1,6 +1,6 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional, Sequelize, HasManyAddAssociationMixin, HasManySetAssociationsMixin } from 'sequelize';
 import db from "../configs/db/db";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Otp from './otp-model';
 import Constants from '../utils/constants';
 import MerchantWalletModel from './merchant-wallet';
@@ -96,12 +96,13 @@ Merchant.init({
 });
 
 
-const salt = bcrypt.genSaltSync(3,'a');
+const salt = bcrypt.genSaltSync(3);
 let password = bcrypt.hashSync('password',salt);
 console.log({password})
 
+
 Merchant.beforeCreate((user)=>{
-    const salt = bcrypt.genSaltSync(3,'a');
+    const salt = bcrypt.genSaltSync(3);
     user.password = bcrypt.hashSync(user.password,salt);
 })
 

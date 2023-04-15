@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin_model_1 = __importDefault(require("../models/admin-model"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class AdminService {
     constructor() {
         this.createAdmin = (data) => __awaiter(this, void 0, void 0, function* () { return yield admin_model_1.default.create(data); });
         this.findAdmin = (filter) => __awaiter(this, void 0, void 0, function* () { return yield admin_model_1.default.findOne({ where: filter }); });
         this.updateAdmin = (filter, data) => __awaiter(this, void 0, void 0, function* () { return yield admin_model_1.default.update(data, { where: filter }); });
         this.verifyPassword = (plane, hash) => {
-            const isPasswordMatched = bcrypt_1.default.compareSync(plane, hash);
+            const isPasswordMatched = bcryptjs_1.default.compareSync(plane, hash);
             console.log({ isPasswordMatched });
             return isPasswordMatched;
         };

@@ -1,6 +1,6 @@
 import Admin from "../models/admin-model"
 import { InferCreationAttributes, InferAttributes } from 'sequelize';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 class AdminService{
 
