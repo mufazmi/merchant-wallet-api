@@ -1,4 +1,4 @@
-import express, {Request,Response,NextFunction, Application} from 'express';
+import express, {Request,Response,NextFunction, Application, response} from 'express';
 import dotenv from 'dotenv'
 dotenv.config()
 import ErrorHandler from './utils/error-handler';
@@ -19,12 +19,23 @@ app.use(express.json())
 
 //Main Route
 import mainRoute from './routes';
+import responseSuccess from './utils/response';
 app.use('/api/v1',mainRoute);
+
+//
+app.get('/',(req:Request,res:Response,next:NextFunction)=>{
+    return responseSuccess({res,message:'EgPaid Merchat Api',data:{
+        name:'EgPaid',
+        type:'Merchant',
+        status: 'ok'
+    }})
+})
 
 // Not Found Middleware
 app.use((req:Request,res:Response,next:NextFunction)=>{
     return next(ErrorHandler.notFound())
 })
+
 
 //Error Middleware
 app.use(errorMiddleware)
