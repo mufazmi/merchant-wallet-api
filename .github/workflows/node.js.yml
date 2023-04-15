@@ -7,32 +7,30 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     name: Building App
     strategy:
       matrix:
-        node-version: [12.]
+        node-version: [12.x]
 
     steps:
-    - name: Setup Node.js
-    - uses: actions/checkout@v3
-    
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
 
     - name: Install Dependencies
       run: npm ci
 
     - name: Build
-    - run: npm run build --if-present
+      run: npm run build --if-present
 
     - name: Archive Production Artifact
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v2
       with:
         name: backend-release
         path: build
@@ -43,10 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out Repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: Download Artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: backend-release
           path: build
