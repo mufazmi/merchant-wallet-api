@@ -16,13 +16,19 @@ jobs:
         node-version: [12.]
 
     steps:
+    - name: Setup Node.js
     - uses: actions/checkout@v3
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build
     - run: npm run build --if-present
 
   deploy_prod:
@@ -42,8 +48,8 @@ jobs:
       - name: Deploying to Production Server Via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ secrets.FTP_HOST_PRODUCTION }}
-          username: ${{ secrets.FTP_USER_PRODUCTION }}
-          password: ${{ secrets.FTP_PASS_PRODUCTION }}
-          server-dir: ${{ secrets.FTP_PATH_PRODUCTION }}
+          server: ${{ secrets.FTP_HOST_PROD }}
+          username: ${{ secrets.FTP_USER_PROD }}
+          password: ${{ secrets.FTP_PASS_PROD }}
+          server-dir: ${{ secrets.FTP_PATH_PROD }}
           local-dir: ./build/
