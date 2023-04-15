@@ -1,11 +1,10 @@
 import express, {Request,Response,NextFunction, Application} from 'express';
 import dotenv from 'dotenv'
+dotenv.config()
 import ErrorHandler from './utils/error-handler';
 import errorMiddleware from './middlewares/error-middleware';
 const cookieParser = require('cookie-parser');
 
-
-dotenv.config()
 import dbInit from './configs/db/init';
 
 //DB Init
@@ -21,7 +20,6 @@ app.use(express.json())
 //Main Route
 import mainRoute from './routes';
 app.use('/api/v1',mainRoute);
-
 
 // Not Found Middleware
 app.use((req:Request,res:Response,next:NextFunction)=>{

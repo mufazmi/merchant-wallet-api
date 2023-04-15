@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const error_handler_1 = __importDefault(require("./utils/error-handler"));
 const error_middleware_1 = __importDefault(require("./middlewares/error-middleware"));
 const cookieParser = require('cookie-parser');
-dotenv_1.default.config();
 const init_1 = __importDefault(require("./configs/db/init"));
 //DB Init
 (0, init_1.default)();

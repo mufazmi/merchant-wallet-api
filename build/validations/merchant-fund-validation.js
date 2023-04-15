@@ -7,16 +7,10 @@ const joi_1 = __importDefault(require("joi"));
 class MerchantFundValidation {
     constructor() {
         this.create = joi_1.default.object({
-            name: joi_1.default.string().min(2).max(100).required(),
-            code: joi_1.default.string().min(2).max(10).required(),
-            country_id: joi_1.default.string().uuid().required(),
-            status: joi_1.default.boolean().default(true),
+            amount: joi_1.default.number().min(1).required()
         });
         this.update = joi_1.default.object({
-            name: joi_1.default.string().min(2).max(100).optional(),
-            code: joi_1.default.string().min(2).max(10).optional(),
-            country_id: joi_1.default.string().uuid().optional(),
-            status: joi_1.default.boolean().default(true)
+            amount: joi_1.default.number().min(1).optional()
         });
     }
 }

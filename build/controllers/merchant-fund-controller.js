@@ -20,7 +20,10 @@ const merchant_fund_service_1 = __importDefault(require("../services/merchant-fu
 class MerchantFundController {
     constructor() {
         this.create = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            //@ts-ignore
+            const id = req.merchant.id;
             const body = yield merchant_fund_validation_1.default.create.validateAsync(req.body);
+            body.merchant_id = id;
             const data = yield merchant_fund_service_1.default.create(body);
             return data ? (0, response_1.default)({ res: res, message: messages_1.default.MERCHANT.FUND_MERCHANT_CREATED }) : next(error_handler_1.default.serverError(messages_1.default.MERCHANT.FUND_MERCHANT_CREATION_FAILED));
         });
@@ -31,21 +34,7 @@ class MerchantFundController {
         });
         this.findAll = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             const data = yield merchant_fund_service_1.default.findAll({});
-            return data ? (0, response_1.default)({ res: res, message: messages_1.default.MERCHANT.FUND_MERCHANT_FOUND, data: data }) : next(error_handler_1.default.notFound(messages_1.default.MERCHANT.FUND_MERCHANT_NOT_FOUND));
-        });
-        this.update = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const body = yield merchant_fund_validation_1.default.update.validateAsync(req.body);
-            const template = yield merchant_fund_service_1.default.findOne({ id });
-            if (!template)
-                return next(error_handler_1.default.notFound(messages_1.default.MERCHANT.FUND_MERCHANT_NOT_FOUND));
-            const data = yield merchant_fund_service_1.default.update({ id }, body);
-            return data ? (0, response_1.default)({ res: res, message: messages_1.default.MERCHANT.FUND_MERCHANT_UPDATED }) : next(error_handler_1.default.serverError(messages_1.default.MERCHANT.FUND_MERCHANT_UPDATE_FAILED));
-        });
-        this.destroy = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const data = yield merchant_fund_service_1.default.destroy({ id });
-            return data ? (0, response_1.default)({ res: res, message: messages_1.default.MERCHANT.FUND_MERCHANT_DELATED }) : next(error_handler_1.default.notFound(messages_1.default.MERCHANT.FUND_MERCHANT_DELETE_FAILED));
+            return data.length > 1 ? (0, response_1.default)({ res: res, message: messages_1.default.MERCHANT.FUND_MERCHANT_FOUND, data: data }) : next(error_handler_1.default.notFound(messages_1.default.MERCHANT.FUND_MERCHANT_NOT_FOUND));
         });
     }
 }

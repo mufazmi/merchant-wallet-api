@@ -17,6 +17,8 @@ const config_1 = __importDefault(require("../config"));
 const admin_wallet_1 = __importDefault(require("../../models/admin-wallet"));
 const admin_wallet_transaction_model_1 = __importDefault(require("../../models/admin-wallet-transaction-model"));
 const merchant_wallet_1 = __importDefault(require("../../models/merchant-wallet"));
+const merchant_funds_1 = __importDefault(require("../../models/merchant-funds"));
+const merchant_wallet_transaction_1 = __importDefault(require("../../models/merchant-wallet-transaction"));
 require('./db');
 const isDev = config_1.default.APP_ENV === 'development';
 console.log("config.APP_ENV === 'development'", config_1.default.APP_ENV === 'development');
@@ -30,8 +32,12 @@ const dbInit = () => __awaiter(void 0, void 0, void 0, function* () {
     // await NotificationTokenModel.sync({alter:isDev})
     // await TokenModel.sync({alter:isDev})
     // await Merchant.sync({alter:isDev})
+    //Admin
     yield admin_wallet_1.default.sync({ alter: isDev });
     yield admin_wallet_transaction_model_1.default.sync({ alter: isDev });
+    //Merchant
     yield merchant_wallet_1.default.sync({ alter: isDev });
+    yield merchant_funds_1.default.sync({ alter: isDev });
+    yield merchant_wallet_transaction_1.default.sync({ alter: true });
 });
 exports.default = dbInit;

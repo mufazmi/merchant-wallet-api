@@ -10,6 +10,4 @@ const router = express_1.default.Router();
 router.post('/', am(merchant_fund_controller_1.default.create));
 router.get('/', am(merchant_fund_controller_1.default.findAll));
 router.get('/:id', am(merchant_fund_controller_1.default.findOne));
-router.patch('/:id', am(merchant_fund_controller_1.default.update));
-router.delete('/:id', am(merchant_fund_controller_1.default.destroy));
 exports.default = router;

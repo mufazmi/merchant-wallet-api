@@ -9,6 +9,8 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const otp_model_1 = __importDefault(require("./otp-model"));
 const constants_1 = __importDefault(require("../utils/constants"));
 const merchant_wallet_1 = __importDefault(require("./merchant-wallet"));
+const merchant_funds_1 = __importDefault(require("./merchant-funds"));
+const admin_wallet_1 = __importDefault(require("./admin-wallet"));
 class Merchant extends sequelize_1.Model {
 }
 Merchant.init({
@@ -87,4 +89,6 @@ Merchant.beforeCreate((user) => {
 });
 Merchant.hasMany(otp_model_1.default, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'otps' });
 Merchant.hasOne(merchant_wallet_1.default, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'wallet' });
+Merchant.hasOne(merchant_funds_1.default, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'merchant_fund' });
+Merchant.hasOne(admin_wallet_1.default, { sourceKey: 'id', foreignKey: 'approved_by', as: 'approved_by' });
 exports.default = Merchant;

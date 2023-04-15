@@ -31,7 +31,7 @@ class MessageTemplateController {
         });
         this.findAll = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             const data = yield message_template_service_1.default.findAll({});
-            return data ? (0, response_1.default)({ res: res, message: messages_1.default.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(error_handler_1.default.notFound(messages_1.default.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
+            return data.length > 1 ? (0, response_1.default)({ res: res, message: messages_1.default.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(error_handler_1.default.notFound(messages_1.default.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
         });
         this.update = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;

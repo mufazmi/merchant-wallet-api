@@ -32,7 +32,7 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         if (!tokenUser)
             return next(error_handler_1.default.forbidden("Access Expired"));
         //@ts-ignore
-        req.admin = token_service_1.default;
+        req.merchant = tokenUser;
     }
     catch (e) {
         if (e instanceof jsonwebtoken_1.TokenExpiredError) {
@@ -44,8 +44,9 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
             const token = yield token_service_1.default.findRefreshToken(refreshTokenReq);
             if (!token)
                 return error_handler_1.default.forbidden("Access Expired");
-            console.log(token);
+            return next(error_handler_1.default.forbidden("Unauthorized Access!"));
         }
+        return next(error_handler_1.default.forbidden("Please Login First"));
     }
     return next();
 });

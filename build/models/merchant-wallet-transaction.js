@@ -52,7 +52,7 @@ MerchantWalletTransactionModel.init({
     },
     status: {
         type: sequelize_1.DataTypes.ENUM,
-        values: [constants_1.default.TRANSACTION.STATUS_SUCCESS, constants_1.default.TRANSACTION.STATUS_SUCCESS],
+        values: [constants_1.default.TRANSACTION.STATUS_SUCCESS, constants_1.default.TRANSACTION.STATUS_FAILED],
         allowNull: false
     }
 }, {
