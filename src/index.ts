@@ -23,13 +23,13 @@ import responseSuccess from './utils/response';
 app.use('/api/v1',mainRoute);
 
 //
-app.get('/',(req:Request,res:Response,next:NextFunction)=>{
-    return responseSuccess({res,message:'EgPaid Merchat Api',data:{
-        name:'EgPaid',
-        type:'Merchant',
-        status: 'ok'
-    }})
-})
+// app.get('/',(req:Request,res:Response,next:NextFunction)=>{
+//     return responseSuccess({res,message:'EgPaid Merchat Api',data:{
+//         name:'EgPaid',
+//         type:'Merchant',
+//         status: 'ok'
+//     }})
+// })
 
 // Not Found Middleware
 app.use((req:Request,res:Response,next:NextFunction)=>{
