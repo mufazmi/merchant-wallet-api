@@ -32,9 +32,9 @@ app.get('/',(req:Request,res:Response,next:NextFunction)=>{
 })
 
 // Not Found Middleware
-// app.use((req:Request,res:Response,next:NextFunction)=>{
-//     return next(ErrorHandler.notFound())
-// })
+app.use((req:Request,res:Response,next:NextFunction)=>{
+    return next(ErrorHandler.notFound())
+})
 
 //Error Middleware
 app.use(errorMiddleware)
