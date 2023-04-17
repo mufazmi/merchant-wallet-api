@@ -20,9 +20,12 @@ app.use(express.json())
 //Main Route
 import mainRoute from './routes';
 import responseSuccess from './utils/response';
+
+// Serve static files from the public directory
+app.use(express.static('public'));
+
 app.use('/api/v1',mainRoute);
 
-//
 // app.get('/',(req:Request,res:Response,next:NextFunction)=>{
 //     return responseSuccess({res,message:'EgPaid Merchat Api',data:{
 //         name:'EgPaid',
@@ -30,6 +33,7 @@ app.use('/api/v1',mainRoute);
 //         status: 'ok'
 //     }})
 // })
+
 
 // Not Found Middleware
 app.use((req:Request,res:Response,next:NextFunction)=>{
