@@ -4,11 +4,11 @@ import responseSuccess from "../utils/response";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import merchantFundService from "../services/merchant-fund-service";
+import { AuthRequest } from "../interfaces/interface";
 
 class MerchantFundController {
 
-    create = async (req: Request, res: Response, next: NextFunction) => {
-        //@ts-ignore
+    create = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const id = req.merchant.id;
         const body = await merchantFundValidation.create.validateAsync(req.body);
         body.merchant_id = id
