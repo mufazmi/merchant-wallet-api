@@ -5,3 +5,4 @@ export interface UserCreationInterface {
     name:string,
     mobile:string
 }
+
