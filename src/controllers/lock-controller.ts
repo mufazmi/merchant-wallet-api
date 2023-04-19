@@ -6,12 +6,12 @@ import ErrorHandler from "../utils/error-handler";
 import responseSuccess from "../utils/response";
 import lockValidation from "../validations/lock-validation";
 import express,{Request,Response,NextFunction} from "express";
+import { AuthRequest } from "../interfaces/interface";
 
 class LockController{
 
-    setLock = async (req: Request, res: Response, next: NextFunction) => {
-        //@ts-ignore
-        const user = req.user;
+    setLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const user = req.merchant;
         const body = await lockValidation.create.validateAsync(req.body);
         const lock = await lockService.findOne({user_id:user.id});
         if(lock)
@@ -22,9 +22,8 @@ class LockController{
         return data ? responseSuccess({ res: res, message: "Lock Set" }) : next(ErrorHandler.serverError("Not Set"))
     }
 
-    verifyLock = async (req: Request, res: Response, next: NextFunction) => {
-        //@ts-ignore
-        const user = req.user;
+    verifyLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const user = req.merchant;
         const body = await lockValidation.verify.validateAsync(req.body);
         const lock = await lockService.findOne({id:user.id});
         if(!lock)
@@ -46,9 +45,8 @@ class LockController{
         return lock ? responseSuccess({ res: res, message: "Password Set" }) : next(ErrorHandler.serverError("Not Set"))
     }
 
-    updateLock = async (req: Request, res: Response, next: NextFunction) => {
-        //@ts-ignore
-        const mUser = req.user;
+    updateLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const mUser = req.merchant;
         const body = await lockValidation.update.validateAsync(req.body);
         const lock: InferAttributes<Lock> | null = await lockService.findOne({ id: mUser.id });
         if(!lock)
@@ -63,9 +61,8 @@ class LockController{
         return data ? responseSuccess({ res: res, message: "Lock Updated" }) : next(ErrorHandler.serverError("Lock Update Failed"))
     }
 
-    deleteLock = async (req: Request, res: Response, next: NextFunction) => {
-        //@ts-ignore
-        const mUser = req.user;
+    deleteLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const mUser = req.merchant;
         const body = await lockValidation.update.validateAsync(req.body);
         const lock: InferAttributes<Lock> | null = await lockService.findOne({ id: mUser.id });
         if(!lock)
