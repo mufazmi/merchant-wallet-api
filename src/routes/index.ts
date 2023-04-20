@@ -12,6 +12,7 @@ import stateRoute from '../routes/state-route';
 import cityRoute from '../routes/city-route';
 import notificationRoute from '../routes/notification-route';
 import auth from '../middlewares/auth-middleware';
+import businessRoute from '../routes/business-route';
 
 
 router.use('/auth', merchantAuthRoute);
@@ -19,6 +20,7 @@ router.use('/fund', merchantFundRoute);
 router.use('/transaction', auth,merchantWalletTransactionRoute);
 router.use('/message/template', messageTemplateRoute);
 router.use('/country', countryRoute);
+router.use('/business',businessRoute);
 // router.use('/state', stateRoute);
 // router.use('/city', cityRoute);
 // router.use('/notification', notificationRoute);
