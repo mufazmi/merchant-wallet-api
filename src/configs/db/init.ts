@@ -22,7 +22,7 @@ console.log("config.APP_ENV === 'development'",config.APP_ENV === 'development')
 
 const dbInit = async () =>{
     // await Admin.sync({alter:isDev})
-    // await Merchant.sync({alter:isDev})
+    await Merchant.sync({alter:isDev})
     // await Otp.sync({alter:isDev})
     // await MessageTemplateModel.sync({alter:isDev})
     // await CountryModel.sync({alter:isDev})

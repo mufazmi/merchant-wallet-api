@@ -11,8 +11,11 @@ class BusinessController {
 
     create = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const merchant = req.merchant;
-        const business = await businessService.findOne({});
         const body = await businessValidation.create.validateAsync(req.body);
+        const business = await businessService.findOne({owner_id:merchant.id});
+        if(business)
+            return ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_FOUND)
+            
         const data = await businessService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
     }
@@ -24,11 +27,6 @@ class BusinessController {
 
     }
 
-    findAll = async (req: Request, res: Response, next: NextFunction) => {
-        const data = await businessService.findAll({});
-        return data.length > 1 ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
-    }
-
     update = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const body = await businessValidation.update.validateAsync(req.body);
@@ -38,13 +36,6 @@ class BusinessController {
 
         const data = await businessService.update({ id }, body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));
-    }
-
-
-    destroy = async (req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
-        const data = await businessService.destroy({id});
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_DELATED }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_DELETE_FAILED));
     }
 }
 
