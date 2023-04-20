@@ -14,7 +14,7 @@ class BusinessController {
         const body = await businessValidation.create.validateAsync(req.body);
         const business = await businessService.findOne({ owner_id: merchant.id });
         if (business)
-            return ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_FOUND)
+            return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ALREADY_CREATED))
         body.owner_id = merchant.id
         const data = await businessService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));

@@ -59,6 +59,7 @@ class Messages {
 
     static BUSINESS = {
         BUSINESS_CREATED: 'Business Created Successfully',
+        BUSINESS_ALREADY_CREATED: 'Business Alredy Created',
         BUSINESS_CREATION_FAILED: 'Failed To Create Business',
         BUSINESS_FOUND: 'Business Found',
         BUSINESS_NOT_FOUND: 'No Business Found',
