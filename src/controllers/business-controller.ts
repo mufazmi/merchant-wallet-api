@@ -15,16 +15,15 @@ class BusinessController {
         const business = await businessService.findOne({ owner_id: merchant.id });
         if (business)
             return ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_FOUND)
-
+        body.owner_id = merchant.id
         const data = await businessService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
     }
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
-        const data = await businessService.findAll({ owner_id: id });
+        const data = await businessService.findOne({ owner_id: id });
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
-
     }
 
     update = async (req: AuthRequest, res: Response, next: NextFunction) => {

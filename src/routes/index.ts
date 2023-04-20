@@ -17,10 +17,10 @@ import businessRoute from '../routes/business-route';
 
 router.use('/auth', merchantAuthRoute);
 router.use('/fund', merchantFundRoute);
-router.use('/transaction', auth,merchantWalletTransactionRoute);
+router.use('/transaction', auth, merchantWalletTransactionRoute);
 router.use('/message/template', messageTemplateRoute);
 router.use('/country', countryRoute);
-router.use('/business',businessRoute);
+router.use('/business', auth, businessRoute);
 // router.use('/state', stateRoute);
 // router.use('/city', cityRoute);
 // router.use('/notification', notificationRoute);
