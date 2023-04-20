@@ -4,6 +4,7 @@ import merchantController from '../controllers/merchant-controller';
 const am = require('../middlewares/async-middleware');
 
 const router = express.Router();
-router.post('/profile',am(merchantController.profile))
+
+router.get('/profile',am(merchantController.profile))
 
 export default router;
