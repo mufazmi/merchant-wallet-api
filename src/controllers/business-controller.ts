@@ -33,7 +33,7 @@ class BusinessController {
         if (!business)
             return next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND))
 
-        const data = await businessService.update({ id }, body);
+        const data = await businessService.update({ id:business.id }, body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));
     }
 }
