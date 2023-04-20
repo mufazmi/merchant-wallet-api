@@ -6,6 +6,7 @@ import Constants from '../utils/constants';
 import MerchantWalletModel from './merchant-wallet';
 import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
+import BusinessModel from './business-model';
 
 class Merchant extends Model<InferAttributes<Merchant>,InferCreationAttributes<Merchant>>{
 
@@ -113,6 +114,8 @@ Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:
 
 Merchant.hasOne(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
 
-Merchant.hasOne(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
+Merchant.hasOne(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approver'});
+
+Merchant.hasOne(BusinessModel,{sourceKey:'id',foreignKey:'owner_id',as:'business'});
 
 export default Merchant

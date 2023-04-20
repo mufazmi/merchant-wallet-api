@@ -4,11 +4,14 @@ import responseSuccess from "../utils/response";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import businessService from "../services/business-service";
+import { AuthRequest } from "../interfaces/interface";
 
 
 class BusinessController {
 
-    create = async (req: Request, res: Response, next: NextFunction) => {
+    create = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const merchant = req.merchant;
+        const business = await businessService.findOne({});
         const body = await businessValidation.create.validateAsync(req.body);
         const data = await businessService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));

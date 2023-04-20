@@ -11,8 +11,8 @@ class BusinessModel extends Model<InferAttributes<BusinessModel>,InferCreationAt
     declare gst:string
     declare no:string
     declare type:string
-    declare status:boolean
-    declare merchant_id : ForeignKey<Merchant['id']>
+    declare status:string
+    declare owner_id : ForeignKey<Merchant['id']>
 }
 
 BusinessModel.init({
@@ -45,11 +45,11 @@ BusinessModel.init({
     type:{
         type:DataTypes.STRING(10),
         allowNull:false,
-        unique:true,
     },
     status:{
-        type:DataTypes.BOOLEAN,
-        defaultValue:true
+        type:DataTypes.ENUM,
+        values:['kyc_pending'],
+        defaultValue:'kyc_pending'
     }
 },{
     tableName:'businesses',
@@ -59,9 +59,5 @@ BusinessModel.init({
     sequelize:db
 });
 
-BusinessModel.hasMany(StateModel,{
-    sourceKey:'id',
-    foreignKey:'business_id'
-})
 
 export default BusinessModel
