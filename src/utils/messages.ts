@@ -77,7 +77,16 @@ class Messages {
         FUND_MERCHANT_UPDATED: 'Merchant Fund Updated',
         FUND_MERCHANT_UPDATE_FAILED: 'Failed To Updated Merchant Fund',
         FUND_MERCHANT_DELATED: 'Merchant Fund Deleted',
-        FUND_MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant Fund'
+        FUND_MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant Fund',
+
+        MERCHANT_CREATED: 'Merchant Created Successfully',
+        MERCHANT_CREATION_FAILED: 'Failed To Create Merchant',
+        MERCHANT_FOUND: 'Merchant Found',
+        MERCHANT_NOT_FOUND: 'No Merchant Found',
+        MERCHANT_UPDATED: 'Merchant Updated',
+        MERCHANT_UPDATE_FAILED: 'Failed To Updated Merchant',
+        MERCHANT_DELATED: 'Merchant Deleted',
+        MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant'
     }
 
 
