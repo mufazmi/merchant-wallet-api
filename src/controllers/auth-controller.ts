@@ -18,9 +18,9 @@ class AuthController {
         if (!merchant)
             return next(ErrorHandler.notFound(Messages.AUTH.ACCOUNT_NOT_FOUND))
 
-        const isMatched: boolean = merchantService.verifyPassword(body.password, merchant.password);
-        if (!isMatched)
-            return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
+        // const isMatched: boolean = merchantService.verifyPassword(body.password, merchant.password);
+        // if (!isMatched)
+        //     return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
 
         const tokenPayload = {
             id: merchant.id,
