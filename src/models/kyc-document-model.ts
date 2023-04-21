@@ -1,17 +1,17 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional, ForeignKey } from 'sequelize';
 import db from "../configs/db/db";
-import StateModel from './state-model';
+import Merchant from './merchant-model';
 
-class CityModel extends Model<InferAttributes<CityModel>,InferCreationAttributes<CityModel>> {
+class KycDocumentModel extends Model<InferAttributes<KycDocumentModel>,InferCreationAttributes<KycDocumentModel>> {
     declare id:CreationOptional<string>
     declare pan_front:string
     declare aadhar_front:string
     declare aadhar_back:string
     declare proof:string
-    declare stateId : ForeignKey<StateModel['id']>
+    declare merchant_id : ForeignKey<Merchant['id']>
 }
 
-CityModel.init({
+KycDocumentModel.init({
     id:{
         type:DataTypes.UUID,
         defaultValue:DataTypes.UUIDV4,
@@ -42,4 +42,4 @@ CityModel.init({
     sequelize:db
 });
 
-export default CityModel
+export default KycDocumentModel
