@@ -14,12 +14,14 @@ class KycDocumentController {
     create = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant
         const body = await kycDocumentValidation.create.validateAsync(req.body);
+        return res.json({file:req.file,files:req.files,body});
         console.log(body);
         const kycDocument: InferAttributes<KycDocumentModel> | null = await kycDocumentService.findOne({ merchant_id: id });
-        console.log({ kycDocument })
         if (kycDocument)
             return next(ErrorHandler.forbidden(Messages.KYC.DOCUMENT_KYC_ALREADY_CREATED))
+
         body.merchant_id = id
+        
         const data = await kycDocumentService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
     }

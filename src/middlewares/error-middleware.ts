@@ -45,8 +45,8 @@ const errorMiddleware = (err: any, req: Request, res: Response, next: NextFuncti
             console.log({error})
         });
     }
+    console.log(err);
     let payload = { success: false, message: err.message }
-    console.log({payload});
     if (errors) Object.assign(payload,{errors});
     console.log({payload});
     res.status(err.statusCode).json(payload) 
