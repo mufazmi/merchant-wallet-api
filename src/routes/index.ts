@@ -13,6 +13,7 @@ import cityRoute from '../routes/city-route';
 import notificationRoute from '../routes/notification-route';
 import auth from '../middlewares/auth-middleware';
 import businessRoute from './business-route';
+import kycDocumentRoute from './kyc-document-route';
 
 
 router.use('/auth',auth, merchantAuthRoute);
@@ -21,6 +22,7 @@ router.use('/transaction', auth,merchantWalletTransactionRoute);
 router.use('/message/template',auth, messageTemplateRoute);
 router.use('/country',auth, countryRoute);
 router.use('/business',auth, businessRoute);
+router.use('/kyc/document',auth, kycDocumentRoute);
 // router.use('/state', stateRoute);
 // router.use('/city', cityRoute);
 // router.use('/notification', notificationRoute);

@@ -15,6 +15,7 @@ import MerchantWalletModel from "../../models/merchant-wallet";
 import MerchantFundModel from "../../models/merchant-funds";
 import MerchantWalletTransactionModel from "../../models/merchant-wallet-transaction";
 import BusinessModel from "../../models/business-model";
+import KycDocumentModel from "../../models/kyc-document-model";
 require('./db')
 
 const isDev = config.APP_ENV === 'development'
@@ -39,6 +40,7 @@ const dbInit = async () =>{
     await MerchantFundModel.sync({alter:isDev})
     await MerchantWalletTransactionModel.sync({alter:true})
     await BusinessModel.sync({alter:true})
+    await KycDocumentModel.sync({alter:true})
 
 }
 
