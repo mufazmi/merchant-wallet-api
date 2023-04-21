@@ -3,7 +3,7 @@ import db from "../configs/db/db";
 import Constants from '../utils/constants';
 import Merchant from './merchant-model';
 
-class dBusinessModel extends Model<InferAttributes<dBusinessModel>, InferCreationAttributes<dBusinessModel>> {
+class BusinessModel extends Model<InferAttributes<BusinessModel>, InferCreationAttributes<BusinessModel>> {
     declare id: CreationOptional<string>
     declare entity_type: string
     declare name: string
@@ -16,7 +16,7 @@ class dBusinessModel extends Model<InferAttributes<dBusinessModel>, InferCreatio
     declare merchant_id: ForeignKey<Merchant['id']>
 }
 
-dBusinessModel.init({
+BusinessModel.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -62,4 +62,4 @@ dBusinessModel.init({
     sequelize: db
 });
 
-export default dBusinessModel
+export default BusinessModel

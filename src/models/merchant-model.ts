@@ -6,6 +6,7 @@ import Constants from '../utils/constants';
 import MerchantWalletModel from './merchant-wallet';
 import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
+import BusinessModel from './business-model';
 
 class Merchant extends Model<InferAttributes<Merchant>,InferCreationAttributes<Merchant>>{
 
@@ -111,7 +112,9 @@ Merchant.hasMany(Otp,{sourceKey:'id',foreignKey:'merchant_id',as:'otps'});
 
 Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:'wallet'});
 
-Merchant.hasOne(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
+Merchant.hasOne(BusinessModel,{sourceKey:'id',foreignKey:'merchant_id',as:'business'});
+
+Merchant.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
 
 Merchant.hasMany(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
 
