@@ -3,9 +3,7 @@ import Joi from 'joi'
 class KycDocumentValidation {
 
     create = Joi.object({
-        pan_front: {
-            file: Joi.any().required()
-        },
+        file: Joi.any().required()
     });
 
     update = Joi.object({
