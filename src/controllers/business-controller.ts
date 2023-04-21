@@ -23,15 +23,15 @@ class BusinessController {
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
     }
 
-    findOne = async (req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
-        const data = await businessService.findAll({ id });
+    findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const { id } = req.merchant;
+        const data = await businessService.findOne({ merchant_id:id });
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
 
     }
 
-    update = async (req: Request, res: Response, next: NextFunction) => {
-        const { id } = req.params;
+    update = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const { id } = req.merchant;
         const body = await businessValidation.update.validateAsync(req.body);
         const template = await businessService.findOne({ id });
         if (!template)
