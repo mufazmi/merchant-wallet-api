@@ -56,6 +56,18 @@ class Messages {
         CITY_DELETE_FAILED: 'Failed To Delete City'
     }
 
+    static KYC = {
+        DOCUMENT_KYC_CREATED: 'Kyc Document Created Successfully',
+        DOCUMENT_KYC_ALREADY_CREATED: 'Kyc Document Already Added',
+        DOCUMENT_KYC_CREATION_FAILED: 'Failed To Create Kyc Document',
+        DOCUMENT_KYC_FOUND: 'Kyc Document Found',
+        DOCUMENT_KYC_NOT_FOUND: 'No Kyc Document Found',
+        DOCUMENT_KYC_UPDATED: 'Kyc Document Updated',
+        DOCUMENT_KYC_UPDATE_FAILED: 'Failed To Updated Kyc Document',
+        DOCUMENT_KYC_DELATED: 'Kyc Document Deleted',
+        DOCUMENT_KYC_DELETE_FAILED: 'Failed To Delete Kyc Document'
+    }
+
     static BUSINESS = {
         BUSINESS_CREATED: 'Business Created Successfully',
         BUSINESS_ALREADY_CREATED: 'Business Already Added',
