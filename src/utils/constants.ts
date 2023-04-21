@@ -7,6 +7,12 @@ class Constants {
       ROLE_OPERATOR: 'Operator'
    }
 
+   // static ADKMIN = {
+   //    ROLE_DIRECTOR: 'Director',
+   //    ROLE_TECHNICAL: 'Technical',
+   //    ROLE_OPERATOR: 'Operator'
+   // }
+
    static USER = {
       TYPE_ADMIN : 'admin',
       TYPE_MERCHANT : 'merchant'

@@ -113,6 +113,6 @@ Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:
 
 Merchant.hasOne(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
 
-Merchant.hasOne(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
+Merchant.hasMany(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
 
 export default Merchant

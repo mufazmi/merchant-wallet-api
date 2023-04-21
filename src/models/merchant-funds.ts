@@ -5,10 +5,11 @@ import Merchant from './merchant-model';
 import MerchantWalletModel from './merchant-wallet';
 import Admin from './admin-model';
 
-class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferCreationAttributes<MerchantFundModel>> {
+class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferCreationAttributes<MerchantFundModel, {omit:'id'}>> {
     declare id: CreationOptional<string>
     declare amount: number
     declare status: string
+    declare remark: string
     declare merchant_id : ForeignKey<Merchant['id']>
     declare transaction_id : ForeignKey<MerchantWalletModel['id']>
     declare approved_by : ForeignKey<Admin['id']>
@@ -24,6 +25,11 @@ MerchantFundModel.init({
     amount: {
         type: DataTypes.FLOAT,
         allowNull: false
+    },
+    
+    remark: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
     status: {
         type: DataTypes.STRING,
