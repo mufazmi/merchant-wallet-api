@@ -25,8 +25,8 @@ BusinessModel.init({
     },
     entity_type: {
         type: DataTypes.STRING,
-        values: [Constants.STATUS.ENABLE, Constants.STATUS.DISABLE, Constants.STATUS.FREEZ],
-        defaultValue: Constants.STATUS.ENABLE
+        values: [Constants.ENTITY.TYPE_TEST],
+        defaultValue: Constants.ENTITY.TYPE_TEST
     },
     name: {
         type: DataTypes.STRING,
@@ -55,7 +55,7 @@ BusinessModel.init({
     },
 
 }, {
-    tableName: 'merchant_wallets',
+    tableName: 'businesses',
     underscored: true,
     freezeTableName: true,
     timestamps: true,

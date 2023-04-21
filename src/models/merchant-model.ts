@@ -114,6 +114,8 @@ Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:
 
 Merchant.hasOne(BusinessModel,{sourceKey:'id',foreignKey:'merchant_id',as:'business'});
 
+BusinessModel.belongsTo(Merchant,{foreignKey:'merchant_id',as:'business'});
+
 Merchant.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
 
 Merchant.hasMany(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});

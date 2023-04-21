@@ -4,12 +4,21 @@ import responseSuccess from "../utils/response";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import businessService from "../services/business-service";
+import { AuthRequest } from "../interfaces/interface";
+import { InferAttributes } from "sequelize";
+import BusinessModel from "../models/business-model";
 
 
-class CityController {
+class BusinessController {
 
-    create = async (req: Request, res: Response, next: NextFunction) => {
+    create = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        const {id} = req.merchant
         const body = await businessValidation.create.validateAsync(req.body);
+        const business : InferAttributes<BusinessModel> | null = await businessService.findOne({merchant_id:id});
+        console.log({business})
+        if(business)
+            return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ALREADY_CREATED))
+        body.merchant_id = id
         const data = await businessService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
     }
@@ -34,4 +43,4 @@ class CityController {
 
 }
 
-export default new CityController
+export default new BusinessController
