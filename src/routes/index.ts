@@ -16,7 +16,7 @@ import businessRoute from './business-route';
 import kycDocumentRoute from './kyc-document-route';
 
 
-router.use('/auth',auth, merchantAuthRoute);
+router.use('/auth', merchantAuthRoute);
 router.use('/fund', auth,merchantFundRoute);
 router.use('/transaction', auth,merchantWalletTransactionRoute);
 router.use('/message/template',auth, messageTemplateRoute);
