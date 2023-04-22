@@ -7,6 +7,7 @@ import MerchantWalletModel from './merchant-wallet';
 import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
 import BusinessModel from './business-model';
+import KycDocumentModel from './kyc-document-model';
 
 class Merchant extends Model<InferAttributes<Merchant>,InferCreationAttributes<Merchant>>{
 
@@ -119,5 +120,7 @@ BusinessModel.belongsTo(Merchant,{foreignKey:'merchant_id',as:'business'});
 Merchant.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
 
 Merchant.hasMany(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
+
+Merchant.hasOne(KycDocumentModel,{sourceKey:'id',foreignKey:'merchant_id',as:'kys_documents'});
 
 export default Merchant

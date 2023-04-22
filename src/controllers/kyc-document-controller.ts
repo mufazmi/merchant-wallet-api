@@ -15,35 +15,41 @@ class KycDocumentController {
         const { id } = req.merchant
 
         //VALIDATION AND PROCESS START
-        try {
-            const files: any = req.files;
-            const panFront = files['pan_front']?.[0];
-            const aadharFront = files['aadhar_front']?.[0];
-            const aadharBack = files['aadhar_back']?.[0];
-            const proof = files['proof']?.[0];
-            if (!panFront || !aadharFront || !aadharBack) {
-                // DELETE UPLOAD FILES , IF CONDITION GOES FALSE
-                if (panFront) fs.unlinkSync(panFront.path);
-                if (aadharFront) fs.unlinkSync(aadharFront.path);
-                if (aadharBack) fs.unlinkSync(aadharBack.path);
-                if (proof) fs.unlinkSync(proof.path);
-                return next(ErrorHandler.badRequest("Please upload all images"));
-            }
-        } catch (error) {
-            return next(error);
+        const files: any = req.files;
+        const panFront = files['pan_front']?.[0];
+        const aadharFront = files['aadhar_front']?.[0];
+        const aadharBack = files['aadhar_back']?.[0];
+        const proof = files['proof']?.[0];
+        if (!panFront || !aadharFront || !aadharBack) {
+            // DELETE UPLOAD FILES , IF CONDITION GOES FALSE
+            if (panFront) fs.unlinkSync(panFront.path);
+            if (aadharFront) fs.unlinkSync(aadharFront.path);
+            if (aadharBack) fs.unlinkSync(aadharBack.path);
+            if (proof) fs.unlinkSync(proof.path);
+            return next(ErrorHandler.badRequest("Please upload all images"));
         }
         // VALIDATION AND PROCESS END
-        
-        return res.json('ok')
-        // const kycDocument: InferAttributes<KycDocumentModel> | null = await kycDocumentService.findOne({ merchant_id: id });
-        // if (kycDocument)
-        //     return next(ErrorHandler.forbidden(Messages.KYC.DOCUMENT_KYC_ALREADY_CREATED))
 
-        // body.merchant_id = id
+        const payload = {
+            merchant_id: id,
+            pan_front: panFront.filename,
+            aadhar_front: aadharFront.filename,
+            aadhar_back: aadharBack.filename,
+            proof: proof?.filename,
+        }
 
+        const kycDocument: InferAttributes<KycDocumentModel> | null = await kycDocumentService.findOne({ merchant_id: id });
+        if (kycDocument) {
+            // DELETE UPLOAD FILES , IF KYC DOC ALREADY UPLOADED
+            if (panFront) fs.unlinkSync(panFront.path);
+            if (aadharFront) fs.unlinkSync(aadharFront.path);
+            if (aadharBack) fs.unlinkSync(aadharBack.path);
+            if (proof) fs.unlinkSync(proof.path);
+            return next(ErrorHandler.forbidden(Messages.KYC.DOCUMENT_KYC_ALREADY_CREATED))
+        }
 
-        // const data = await kycDocumentService.create(body);
-        // return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
+        const data = await kycDocumentService.create(payload);
+        return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
     }
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {

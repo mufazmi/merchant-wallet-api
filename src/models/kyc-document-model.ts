@@ -2,8 +2,8 @@ import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOpt
 import db from "../configs/db/db";
 import Merchant from './merchant-model';
 
-class KycDocumentModel extends Model<InferAttributes<KycDocumentModel>,InferCreationAttributes<KycDocumentModel>> {
-    declare id:CreationOptional<string>
+class KycDocumentModel extends Model<InferAttributes<KycDocumentModel>,InferCreationAttributes<KycDocumentModel,{omit:'id'}>> {
+    declare id?:CreationOptional<string>
     declare pan_front:string
     declare aadhar_front:string
     declare aadhar_back:string
@@ -32,7 +32,7 @@ KycDocumentModel.init({
     },
     proof:{
         type:DataTypes.STRING(128),
-        allowNull:false
+        allowNull:true
     }
 },{
     tableName:'kyc_documents',
