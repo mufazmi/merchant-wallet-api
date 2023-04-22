@@ -17,6 +17,10 @@ class Constants {
    //    ROLE_OPERATOR: 'Operator'
    // }
 
+   static PATH = {
+      KYC_IMAGE : './storage/uploads/kyc/images/'
+   }
+
    static USER = {
       TYPE_ADMIN : 'admin',
       TYPE_MERCHANT : 'merchant'
