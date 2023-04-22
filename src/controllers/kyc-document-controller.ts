@@ -7,29 +7,33 @@ import kycDocumentService from "../services/kyc-document-service";
 import { AuthRequest } from "../interfaces/interface";
 import { InferAttributes } from "sequelize";
 import KycDocumentModel from "../models/kyc-document-model";
-
+import fs from 'fs'
 
 class KycDocumentController {
 
     create = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant
 
+        //VALIDATION AND PROCESS START
         try {
             const files: any = req.files;
-            const panFront = files['pan_front'][0];
-            const aadharFront = files['aadhar_front'][0];
-            const aadharBack = files['aadhar_back'][0];
-            const proof = files['proof'][0];
-            if (!panFront || !aadharBack || !aadharBack) {
-                const error = new Error('Please upload all images');
-                return next(error);
+            const panFront = files['pan_front']?.[0];
+            const aadharFront = files['aadhar_front']?.[0];
+            const aadharBack = files['aadhar_back']?.[0];
+            const proof = files['proof']?.[0];
+            if (!panFront || !aadharFront || !aadharBack) {
+                // DELETE UPLOAD FILES , IF CONDITION GOES FALSE
+                if (panFront) fs.unlinkSync(panFront.path);
+                if (aadharFront) fs.unlinkSync(aadharFront.path);
+                if (aadharBack) fs.unlinkSync(aadharBack.path);
+                if (proof) fs.unlinkSync(proof.path);
+                return next(ErrorHandler.badRequest("Please upload all images"));
             }
-            res.send({ aadharFront, aadharBack, panFront });
         } catch (error) {
-            next(error);
+            return next(error);
         }
-
-        // const body = await kycDocumentValidation.create.validateAsync(req.body);
+        // VALIDATION AND PROCESS END
+        
         return res.json('ok')
         // const kycDocument: InferAttributes<KycDocumentModel> | null = await kycDocumentService.findOne({ merchant_id: id });
         // if (kycDocument)

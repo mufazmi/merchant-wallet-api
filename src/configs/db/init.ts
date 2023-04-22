@@ -22,23 +22,23 @@ const isDev = config.APP_ENV === 'development'
 console.log("config.APP_ENV === 'development'",config.APP_ENV === 'development')
 
 const dbInit = async () =>{
-    // await Admin.sync({alter:isDev})
-    // await Otp.sync({alter:isDev})
-    // await MessageTemplateModel.sync({alter:isDev})
-    // await CountryModel.sync({alter:isDev})
-    // await StateModel.sync({alter:isDev})
-    // await CityModel.sync({alter:isDev})
-    // await NotificationTokenModel.sync({alter:isDev})
-    // await TokenModel.sync({alter:isDev})
-    // await Merchant.sync({alter:isDev})
+    await Admin.sync({alter:isDev})
+    await Merchant.sync({alter:isDev})
+    await Otp.sync({alter:isDev})
+    await MessageTemplateModel.sync({alter:isDev})
+    await CountryModel.sync({alter:isDev})
+    await StateModel.sync({alter:isDev})
+    await CityModel.sync({alter:isDev})
+    await NotificationTokenModel.sync({alter:isDev})
+    await TokenModel.sync({alter:isDev})
     //Admin
     await AdminWalletModel.sync({alter:isDev})
     await AdminWalletTransactionModel.sync({alter:isDev})
 
     //Merchant
     await MerchantWalletModel.sync({alter:isDev})
-    await MerchantFundModel.sync({alter:isDev})
     await MerchantWalletTransactionModel.sync({alter:true})
+    await MerchantFundModel.sync({alter:isDev})
     await BusinessModel.sync({alter:true})
     await KycDocumentModel.sync({alter:true})
 
