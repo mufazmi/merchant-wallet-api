@@ -4,7 +4,6 @@ class CityValidation {
 
     create = Joi.object({
         name:Joi.string().min(2).max(100).required(),
-        code : Joi.string().min(2).max(10).required(),
         state_id : Joi.string().uuid().required(),
         status: Joi.boolean().default(true)
     });

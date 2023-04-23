@@ -23,7 +23,7 @@ class CityController {
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await cityService.findAll({});
-        return data.length > 1 ? responseSuccess({ res: res, message: Messages.CITY.CITY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.CITY.CITY_NOT_FOUND));
+        return data.length > 0 ? responseSuccess({ res: res, message: Messages.CITY.CITY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.CITY.CITY_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
