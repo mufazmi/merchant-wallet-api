@@ -2,6 +2,7 @@ import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOpt
 import db from "../configs/db/db";
 import Constants from '../utils/constants';
 import Merchant from './merchant-model';
+import BusinessAddressModel from './business-address-model';
 
 class BusinessModel extends Model<InferAttributes<BusinessModel>, InferCreationAttributes<BusinessModel>> {
     declare id: CreationOptional<string>
@@ -71,5 +72,7 @@ BusinessModel.init({
     timestamps: true,
     sequelize: db
 });
+
+BusinessModel.hasOne(BusinessAddressModel,{sourceKey:'id',foreignKey:'business_id'})
 
 export default BusinessModel

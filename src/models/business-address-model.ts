@@ -4,6 +4,7 @@ import Merchant from './merchant-model';
 import CityModel from './city-model';
 import CountryModel from './country-model';
 import StateModel from './state-model';
+import BusinessModel from './business-model';
 
 class BusinessAddressModel extends Model<InferAttributes<BusinessAddressModel>, InferCreationAttributes<BusinessAddressModel>> {
     declare id: CreationOptional<string>
@@ -12,6 +13,7 @@ class BusinessAddressModel extends Model<InferAttributes<BusinessAddressModel>, 
     declare district: string
     declare pin_code: string
     declare merchant_id: ForeignKey<Merchant['id']>
+    declare business_id : ForeignKey<BusinessModel['id']>
     declare country_id: ForeignKey<CountryModel['id']>
     declare state_id: ForeignKey<StateModel['id']>
     declare city_id: ForeignKey<CityModel['id']>

@@ -36,8 +36,8 @@ class BusinessController {
         const businessAddress = await businessAddressService.findOne({ merchant_id: id });
         if (!businessAddress)
             return next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_ADDRESS_NOT_FOUND))
-        if (businessAddress.kyc_status === Constants.TYPE.ACTIVE)
-            return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
+        // if (businessAddress.kyc_status === Constants.TYPE.ACTIVE)
+        //     return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
         const data = await businessAddressService.update({ id: businessAddress.id }, body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_UPDATE_FAILED));
     }
