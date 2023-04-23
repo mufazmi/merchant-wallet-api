@@ -8,6 +8,8 @@ import { AuthRequest } from "../interfaces/interface";
 import { InferAttributes } from "sequelize";
 import KycDocumentModel from "../models/kyc-document-model";
 import fs from 'fs'
+import merchantService from "../services/merchant-service";
+import Constants from "../utils/constants";
 
 class KycDocumentController {
 
@@ -49,6 +51,8 @@ class KycDocumentController {
         }
 
         const data = await kycDocumentService.create(payload);
+        if(data)
+            merchantService.updateMerchant({id},{status:Constants.TYPE.KYC_SUBMITTED})
         return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
     }
 
