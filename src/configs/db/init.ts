@@ -23,6 +23,7 @@ const isDev = config.APP_ENV === 'development'
 console.log("config.APP_ENV === 'development'",config.APP_ENV === 'development')
 
 const dbInit = async () =>{
+
     await Admin.sync({alter:isDev})
     await Merchant.sync({alter:isDev})
     await Otp.sync({alter:isDev})
@@ -32,18 +33,18 @@ const dbInit = async () =>{
     await CityModel.sync({alter:isDev})
     await NotificationTokenModel.sync({alter:isDev})
     await TokenModel.sync({alter:isDev})
+
     //Admin
     await AdminWalletModel.sync({alter:isDev})
     await AdminWalletTransactionModel.sync({alter:isDev})
 
     //Merchant
     await MerchantWalletModel.sync({alter:isDev})
-    await MerchantWalletTransactionModel.sync({alter:true})
+    await MerchantWalletTransactionModel.sync({alter:isDev})
     await MerchantFundModel.sync({alter:isDev})
-    await BusinessModel.sync({alter:true})
-    await BusinessAddressModel.sync({alter:true})
-    await KycDocumentModel.sync({alter:true})
-
+    await BusinessModel.sync({alter:isDev})
+    await BusinessAddressModel.sync({alter:isDev})
+    await KycDocumentModel.sync({alter:isDev})
 }
 
 export default dbInit

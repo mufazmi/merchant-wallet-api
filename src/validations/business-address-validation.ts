@@ -7,20 +7,19 @@ class BusinessAddressValidation {
         area: Joi.string().min(2).max(100).required(),
         district: Joi.string().min(2).max(100).required(),
         pin_code: Joi.string().min(2).max(100).required(),
-        country_id: Joi.string().min(2).max(100).required(),
-        state_id: Joi.string().min(2).max(100).required(),
-        city_id: Joi.string().min(2).max(100).required(),
+        country_id: Joi.string().uuid().required(),
+        state_id: Joi.string().uuid().required(),
+        city_id: Joi.string().uuid().required(),
     });
 
     update = Joi.object({
-        name: Joi.string().min(2).max(100).optional(),
-        legal_name: Joi.string().min(2).max(100).optional(),
-        entity_type: Joi.string().min(2).max(100).optional(),
-        business_pan: Joi.string().min(2).max(100).optional(),
-        gst_number: Joi.string().min(2).max(100).optional(),
-        aadhar_number: Joi.string().min(2).max(100).optional(),
-        pan_number: Joi.string().min(2).max(100).optional(),
-        registered_number: Joi.string().min(2).max(100).optional()
+        address: Joi.string().min(2).max(100).optional(),
+        area: Joi.string().min(2).max(100).optional(),
+        district: Joi.string().min(2).max(100).optional(),
+        pin_code: Joi.string().min(2).max(100).optional(),
+        country_id: Joi.string().uuid().optional(),
+        state_id: Joi.string().uuid().optional(),
+        city_id: Joi.string().uuid().optional(),
     });
 
 }
