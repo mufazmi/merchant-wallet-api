@@ -56,6 +56,7 @@ class Messages {
         CITY_DELETE_FAILED: 'Failed To Delete City'
     }
 
+<<<<<<< HEAD
     static KYC = {
         DOCUMENT_KYC_CREATED: 'Kyc Document Created Successfully',
         DOCUMENT_KYC_ALREADY_CREATED: 'Kyc Document Already Added',
@@ -72,12 +73,19 @@ class Messages {
     static BUSINESS = {
         BUSINESS_CREATED: 'Business Created Successfully',
         BUSINESS_ALREADY_CREATED: 'Business Already Added',
+=======
+
+    static BUSINESS = {
+        BUSINESS_CREATED: 'Business Created Successfully',
+        BUSINESS_ALREADY_CREATED: 'Business Alredy Created',
+>>>>>>> d1ea2f4da22767d2345a9c032180d01c9bc7ecd7
         BUSINESS_CREATION_FAILED: 'Failed To Create Business',
         BUSINESS_FOUND: 'Business Found',
         BUSINESS_NOT_FOUND: 'No Business Found',
         BUSINESS_UPDATED: 'Business Updated',
         BUSINESS_UPDATE_FAILED: 'Failed To Updated Business',
         BUSINESS_DELATED: 'Business Deleted',
+<<<<<<< HEAD
         BUSINESS_DELETE_FAILED: 'Failed To Delete Business',
 
         
@@ -90,6 +98,9 @@ class Messages {
         BUSINESS_ADDRESS_UPDATE_FAILED: 'Failed To Updated Business Address',
         BUSINESS_ADDRESS_DELATED: 'Business Address Deleted',
         BUSINESS_ADDRESS_DELETE_FAILED: 'Failed To Delete Business Address'
+=======
+        BUSINESS_DELETE_FAILED: 'Failed To Delete Business'
+>>>>>>> d1ea2f4da22767d2345a9c032180d01c9bc7ecd7
     }
 
     static MERCHANT = {
@@ -100,7 +111,16 @@ class Messages {
         FUND_MERCHANT_UPDATED: 'Merchant Fund Updated',
         FUND_MERCHANT_UPDATE_FAILED: 'Failed To Updated Merchant Fund',
         FUND_MERCHANT_DELATED: 'Merchant Fund Deleted',
-        FUND_MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant Fund'
+        FUND_MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant Fund',
+
+        MERCHANT_CREATED: 'Merchant Created Successfully',
+        MERCHANT_CREATION_FAILED: 'Failed To Create Merchant',
+        MERCHANT_FOUND: 'Merchant Found',
+        MERCHANT_NOT_FOUND: 'No Merchant Found',
+        MERCHANT_UPDATED: 'Merchant Updated',
+        MERCHANT_UPDATE_FAILED: 'Failed To Updated Merchant',
+        MERCHANT_DELATED: 'Merchant Deleted',
+        MERCHANT_DELETE_FAILED: 'Failed To Delete Merchant'
     }
 
 

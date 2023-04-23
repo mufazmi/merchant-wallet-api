@@ -14,13 +14,13 @@ class AuthController {
     login = async (req: Request, res: Response, next: NextFunction) => {
         const body = await authValidation.login.validateAsync(req.body);
 
-        const merchant = await merchantService.findMerchant({ mobile: body.mobile })
+        const merchant = await merchantService.findOne({ mobile: body.mobile })
         if (!merchant)
             return next(ErrorHandler.notFound(Messages.AUTH.ACCOUNT_NOT_FOUND))
 
-        const isMatched: boolean = merchantService.verifyPassword(body.password, merchant.password);
-        if (!isMatched)
-            return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
+        // const isMatched: boolean = merchantService.verifyPassword(body.password, merchant.password);
+        // if (!isMatched)
+        //     return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
 
         const tokenPayload = {
             id: merchant.id,
@@ -43,7 +43,7 @@ class AuthController {
 
         const body = await authValidation.verify.validateAsync(req.body);
 
-        const merchant = await merchantService.findMerchant({ mobile: body.mobile })
+        const merchant = await merchantService.findOne({ mobile: body.mobile })
         if (!merchant)
             return next(ErrorHandler.notFound(Messages.AUTH.ACCOUNT_NOT_FOUND))
 
@@ -56,7 +56,7 @@ class AuthController {
         // pg_balance, wallet, 
 
         if (!merchant.isPhoneVerified)
-            await merchantService.updateMerchant({ mobile: merchant.mobile }, { isPhoneVerified: true });
+            await merchantService.update({ mobile: merchant.mobile }, { isPhoneVerified: true });
 
         if (body.token) {
             const tokenMerfindMerchant = tokenService.verifyAccessToken(body.token);
