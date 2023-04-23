@@ -2,6 +2,7 @@ import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOpt
 import db from "../configs/db/db";
 import CountryModel from './country-model';
 import CityModel from './city-model';
+import BusinessAddressModel from './business-address-model';
 
 class StateModel extends Model<InferAttributes<StateModel>,InferCreationAttributes<StateModel>> {
     declare id:CreationOptional<string>
@@ -40,5 +41,7 @@ StateModel.hasMany(
         foreignKey:'state_id'
     }
 )
+
+StateModel.hasMany(BusinessAddressModel,{sourceKey:'id',foreignKey:'state_id'})
 
 export default StateModel

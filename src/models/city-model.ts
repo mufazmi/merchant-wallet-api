@@ -1,6 +1,7 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional, ForeignKey } from 'sequelize';
 import db from "../configs/db/db";
 import StateModel from './state-model';
+import BusinessAddressModel from './business-address-model';
 
 class CityModel extends Model<InferAttributes<CityModel>,InferCreationAttributes<CityModel>> {
     declare id:CreationOptional<string>
@@ -31,5 +32,7 @@ CityModel.init({
     timestamps:true,
     sequelize:db
 });
+
+CityModel.hasMany(BusinessAddressModel,{sourceKey:'id',foreignKey:'city_id'});
 
 export default CityModel
