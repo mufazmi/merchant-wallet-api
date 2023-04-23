@@ -65,7 +65,8 @@ class Messages {
         DOCUMENT_KYC_UPDATED: 'Kyc Document Updated',
         DOCUMENT_KYC_UPDATE_FAILED: 'Failed To Updated Kyc Document',
         DOCUMENT_KYC_DELATED: 'Kyc Document Deleted',
-        DOCUMENT_KYC_DELETE_FAILED: 'Failed To Delete Kyc Document'
+        DOCUMENT_KYC_DELETE_FAILED: 'Failed To Delete Kyc Document',
+        KYC_ACTIVE : 'Your kyc status is Active'
     }
 
     static BUSINESS = {

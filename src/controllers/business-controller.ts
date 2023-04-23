@@ -7,16 +7,16 @@ import businessService from "../services/business-service";
 import { AuthRequest } from "../interfaces/interface";
 import { InferAttributes } from "sequelize";
 import BusinessModel from "../models/business-model";
+import Constants from "../utils/constants";
 
 
 class BusinessController {
 
     create = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        const {id} = req.merchant
+        const { id } = req.merchant
         const body = await businessValidation.create.validateAsync(req.body);
-        const business : InferAttributes<BusinessModel> | null = await businessService.findOne({merchant_id:id});
-        console.log({business})
-        if(business)
+        const business: InferAttributes<BusinessModel> | null = await businessService.findOne({ merchant_id: id });
+        if (business)
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ALREADY_CREATED))
         body.merchant_id = id
         const data = await businessService.create(body);
@@ -25,7 +25,7 @@ class BusinessController {
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
-        const data = await businessService.findOne({ merchant_id:id });
+        const data = await businessService.findOne({ merchant_id: id });
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
 
     }
@@ -33,11 +33,12 @@ class BusinessController {
     update = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
         const body = await businessValidation.update.validateAsync(req.body);
-        const business = await businessService.findOne({ merchant_id:id });
+        const business = await businessService.findOne({ merchant_id: id });
         if (!business)
             return next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND))
-
-        const data = await businessService.update({ id:business.id }, body);
+        if (business.kyc_status === Constants.TYPE.ACTIVE)
+            return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
+        const data = await businessService.update({ id: business.id }, body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));
     }
 

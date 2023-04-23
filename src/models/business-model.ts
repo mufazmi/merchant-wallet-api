@@ -56,7 +56,7 @@ BusinessModel.init({
     },
     registered_number: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     kyc_status: {
         type: DataTypes.ENUM,
