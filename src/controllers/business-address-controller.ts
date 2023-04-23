@@ -6,8 +6,10 @@ import Messages from '../utils/messages';
 import businessAddressService from "../services/business-address-service";
 import { AuthRequest } from "../interfaces/interface";
 import { InferAttributes } from "sequelize";
-import BusinessModel from "../models/business-address-model";
+import BusinessAddressModel from "../models/business-address-model";
 import Constants from "../utils/constants";
+import BusinessModel from "../models/business-model";
+import businessService from "../services/business-service";
 
 
 class BusinessController {
@@ -15,9 +17,14 @@ class BusinessController {
     create = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant
         const body = await businessAddressValidation.create.validateAsync(req.body);
-        const businessAddress: InferAttributes<BusinessModel> | null = await businessAddressService.findOne({ merchant_id: id });
+        const businessAddress: InferAttributes<BusinessAddressModel> | null = await businessAddressService.findOne({ merchant_id: id });
         if (businessAddress)
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ADDRESS_ALREADY_CREATED))
+
+        const business: InferAttributes<BusinessModel> | null = await businessService.findOne({ merchant_id: id });
+        if (!businessAddress)
+            return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_NOT_FOUND))
+
         body.merchant_id = id
         const data = await businessAddressService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_CREATION_FAILED));
