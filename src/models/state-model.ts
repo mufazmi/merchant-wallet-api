@@ -44,4 +44,6 @@ StateModel.hasMany(
 
 StateModel.hasMany(BusinessAddressModel,{sourceKey:'id',foreignKey:'state_id'})
 
+BusinessAddressModel.belongsTo(StateModel, { foreignKey: 'state_id' });
+
 export default StateModel

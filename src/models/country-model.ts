@@ -50,4 +50,6 @@ CountryModel.hasMany(BusinessAddressModel, {
     foreignKey: 'country_id'
 })
 
+BusinessAddressModel.belongsTo(CountryModel, { foreignKey: 'country_id' });
+
 export default CountryModel

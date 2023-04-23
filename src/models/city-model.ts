@@ -33,6 +33,8 @@ CityModel.init({
     sequelize:db
 });
 
-CityModel.hasMany(BusinessAddressModel,{sourceKey:'id',foreignKey:'city_id'});
+CityModel.hasMany(BusinessAddressModel,{sourceKey:'id',foreignKey:'city_id',as:"city"});
+
+BusinessAddressModel.belongsTo(CityModel, { foreignKey: 'city_id'});
 
 export default CityModel

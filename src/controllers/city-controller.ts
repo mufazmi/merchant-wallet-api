@@ -37,7 +37,6 @@ class CityController {
         return data ? responseSuccess({ res: res, message: Messages.CITY.CITY_UPDATED }) : next(ErrorHandler.serverError(Messages.CITY.CITY_UPDATE_FAILED));
     }
 
-
     destroy = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await cityService.destroy({id});
