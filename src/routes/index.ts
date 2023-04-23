@@ -22,11 +22,11 @@ router.use('/fund', auth,merchantFundRoute);
 router.use('/transaction', auth,merchantWalletTransactionRoute);
 router.use('/message/template',auth, messageTemplateRoute);
 router.use('/country',auth, countryRoute);
+router.use('/state', stateRoute);
+router.use('/city', cityRoute);
 router.use('/business',auth, businessRoute);
 router.use('/business/address',auth, businessAddressRoute);
 router.use('/kyc/document',auth, kycDocumentRoute);
-// router.use('/state', stateRoute);
-// router.use('/city', cityRoute);
 // router.use('/notification', notificationRoute);
 
 

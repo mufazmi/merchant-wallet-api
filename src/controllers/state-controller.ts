@@ -23,7 +23,7 @@ class StateController {
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await stateService.findAll({});
-        return data.length > 1 ? responseSuccess({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
+        return data.length > 0 ? responseSuccess({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
