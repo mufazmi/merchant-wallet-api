@@ -47,9 +47,10 @@ CountryModel.hasMany(StateModel, {
 
 CountryModel.hasMany(BusinessAddressModel, {
     sourceKey: 'id',
-    foreignKey: 'country_id'
+    foreignKey: 'country_id',
+    as: 'country'
 })
 
-BusinessAddressModel.belongsTo(CountryModel, { foreignKey: 'country_id' });
+BusinessAddressModel.belongsTo(CountryModel, { foreignKey: 'country_id', as: 'country' });
 
 export default CountryModel

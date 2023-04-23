@@ -22,7 +22,7 @@ class BusinessController {
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ADDRESS_ALREADY_CREATED))
 
         const business: InferAttributes<BusinessModel> | null = await businessService.findOne({ merchant_id: id });
-        if (!businessAddress)
+        if (!business)
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_NOT_FOUND))
 
         body.merchant_id = id

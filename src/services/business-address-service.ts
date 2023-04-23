@@ -9,9 +9,9 @@ class BusinessAddressService {
 
     findOne = async (filter: any) => await BusinessAddress.findOne({
         where: filter, include: [
-            { model: CountryModel, attributes: ['id', 'name'] },
-            { model: StateModel, attributes: ['id', 'name'] },
-            { model: CityModel, attributes: ['id', 'name'] }
+            { model: CountryModel, attributes: ['id', 'name'], as: 'country' },
+            { model: StateModel, attributes: ['id', 'name'], as: 'state' },
+            { model: CityModel, attributes: ['id', 'name'], as: 'city' }
         ]
     });
 
