@@ -1,6 +1,5 @@
 import { Model, InferAttributes, InferCreationAttributes, DataTypes, CreationOptional, ForeignKey } from 'sequelize';
 import db from "../configs/db/db";
-import Constants from '../utils/constants';
 import Merchant from './merchant-model';
 import CityModel from './city-model';
 import CountryModel from './country-model';

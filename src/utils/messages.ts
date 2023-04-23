@@ -78,7 +78,18 @@ class Messages {
         BUSINESS_UPDATED: 'Business Updated',
         BUSINESS_UPDATE_FAILED: 'Failed To Updated Business',
         BUSINESS_DELATED: 'Business Deleted',
-        BUSINESS_DELETE_FAILED: 'Failed To Delete Business'
+        BUSINESS_DELETE_FAILED: 'Failed To Delete Business',
+
+        
+        BUSINESS_ADDRESS_CREATED: 'Business Address Created Successfully',
+        BUSINESS_ADDRESS_ALREADY_CREATED: 'Business Address Already Added',
+        BUSINESS_ADDRESS_CREATION_FAILED: 'Failed To Create Business Address',
+        BUSINESS_ADDRESS_FOUND: 'Business Address Found',
+        BUSINESS_ADDRESS_NOT_FOUND: 'No Business Address Found',
+        BUSINESS_ADDRESS_UPDATED: 'Business Address Updated',
+        BUSINESS_ADDRESS_UPDATE_FAILED: 'Failed To Updated Business Address',
+        BUSINESS_ADDRESS_DELATED: 'Business Address Deleted',
+        BUSINESS_ADDRESS_DELETE_FAILED: 'Failed To Delete Business Address'
     }
 
     static MERCHANT = {
