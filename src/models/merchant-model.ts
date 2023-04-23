@@ -7,10 +7,7 @@ import MerchantWalletModel from './merchant-wallet';
 import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
 import BusinessModel from './business-model';
-<<<<<<< HEAD
 import KycDocumentModel from './kyc-document-model';
-=======
->>>>>>> d1ea2f4da22767d2345a9c032180d01c9bc7ecd7
 
 class Merchant extends Model<InferAttributes<Merchant>,InferCreationAttributes<Merchant>>{
 
@@ -118,7 +115,6 @@ Merchant.hasOne(MerchantWalletModel,{sourceKey:'id',foreignKey:'merchant_id',as:
 
 Merchant.hasOne(BusinessModel,{sourceKey:'id',foreignKey:'merchant_id',as:'business'});
 
-<<<<<<< HEAD
 BusinessModel.belongsTo(Merchant,{foreignKey:'merchant_id',as:'business'});
 
 Merchant.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'merchant_fund'});
@@ -126,10 +122,5 @@ Merchant.hasMany(MerchantFundModel,{sourceKey:'id',foreignKey:'merchant_id',as:'
 Merchant.hasMany(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approved_by'});
 
 Merchant.hasOne(KycDocumentModel,{sourceKey:'id',foreignKey:'merchant_id',as:'kys_documents'});
-=======
-Merchant.hasOne(AdminWalletModel,{sourceKey:'id',foreignKey:'approved_by',as:'approver'});
-
-Merchant.hasOne(BusinessModel,{sourceKey:'id',foreignKey:'owner_id',as:'business'});
->>>>>>> d1ea2f4da22767d2345a9c032180d01c9bc7ecd7
 
 export default Merchant
