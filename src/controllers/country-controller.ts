@@ -23,7 +23,7 @@ class CountryController {
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await countryService.findAll({});
-        return data.length > 1 ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
+        return data.length > 0 ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
