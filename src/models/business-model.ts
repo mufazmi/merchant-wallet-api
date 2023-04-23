@@ -73,6 +73,8 @@ BusinessModel.init({
     sequelize: db
 });
 
-BusinessModel.hasOne(BusinessAddressModel,{sourceKey:'id',foreignKey:'business_id'})
+BusinessModel.hasOne(BusinessAddressModel, { sourceKey: 'id', foreignKey: 'business_id', as: 'business' })
+
+BusinessAddressModel.belongsTo(BusinessModel, { foreignKey: 'business_id', as: 'business' })
 
 export default BusinessModel

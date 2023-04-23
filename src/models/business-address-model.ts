@@ -13,7 +13,7 @@ class BusinessAddressModel extends Model<InferAttributes<BusinessAddressModel>, 
     declare district: string
     declare pin_code: string
     declare merchant_id: ForeignKey<Merchant['id']>
-    declare business_id : ForeignKey<BusinessModel['id']>
+    declare business_id: ForeignKey<BusinessModel['id']>
     declare country_id: ForeignKey<CountryModel['id']>
     declare state_id: ForeignKey<StateModel['id']>
     declare city_id: ForeignKey<CityModel['id']>
@@ -42,7 +42,6 @@ BusinessAddressModel.init({
         type: DataTypes.STRING,
         allowNull: false
     }
-
 }, {
     tableName: 'business_addresses',
     underscored: true,
@@ -50,5 +49,6 @@ BusinessAddressModel.init({
     timestamps: true,
     sequelize: db
 });
+
 
 export default BusinessAddressModel
