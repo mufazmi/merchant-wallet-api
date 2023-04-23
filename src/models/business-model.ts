@@ -10,6 +10,8 @@ class BusinessModel extends Model<InferAttributes<BusinessModel>, InferCreationA
     declare legal_name: string
     declare business_pan: string
     declare gst_number: number
+    declare aadhar_number: number
+    declare pan_number: number
     declare registered_number: string
     // declare relation_ship_manager_name: string
     declare kyc_status: string
@@ -41,6 +43,14 @@ BusinessModel.init({
         allowNull: false
     },
     gst_number: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    aadhar_number: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    pan_number: {
         type: DataTypes.STRING,
         allowNull: false
     },
