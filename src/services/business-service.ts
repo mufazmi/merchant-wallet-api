@@ -8,11 +8,12 @@ class BusinessService {
     findOne = async (filter: any) => await Business.findOne({
         where: filter, include: [
             {
-                BusinessAddressModel,
+                model: BusinessAddressModel,
                 as: 'business'
             }
         ]
     });
+
 
     findAll = async (filter: any) => await Business.findAll({ where: filter });
 
