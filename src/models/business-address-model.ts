@@ -8,7 +8,6 @@ import BusinessModel from './business-model';
 
 class BusinessAddressModel extends Model<InferAttributes<BusinessAddressModel>, InferCreationAttributes<BusinessAddressModel>> {
     declare id: CreationOptional<string>
-    declare address: string
     declare area: string
     declare district: string
     declare pin_code: string
@@ -24,10 +23,6 @@ BusinessAddressModel.init({
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false
-    },
-    address: {
-        type: DataTypes.STRING,
         allowNull: false
     },
     area: {

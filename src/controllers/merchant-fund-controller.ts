@@ -12,13 +12,16 @@ class MerchantFundController {
         const id = req.merchant.id;
         const body = await merchantFundValidation.create.validateAsync(req.body);
         body.merchant_id = id
+        body.remark  = 'asd'
         const data = await merchantFundService.create(body);
+        console.log({body})
+        console.log("data========>",data);
         return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_CREATED }) : next(ErrorHandler.serverError(Messages.MERCHANT.FUND_MERCHANT_CREATION_FAILED));
     }
 
     findOne = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
-        const data = await merchantFundService.findAll({ id });
+        const data = await merchantFundService.findOne({ id });
         return data ? responseSuccess({ res: res, message: Messages.MERCHANT.FUND_MERCHANT_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MERCHANT.FUND_MERCHANT_NOT_FOUND));
     }
 

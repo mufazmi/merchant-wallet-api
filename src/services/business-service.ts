@@ -9,7 +9,7 @@ class BusinessService {
         where: filter, include: [
             {
                 model: BusinessAddressModel,
-                as: 'business'
+                as: 'address'
             }
         ]
     });

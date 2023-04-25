@@ -11,7 +11,7 @@ class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferC
     declare status: string
     declare remark: string
     declare merchant_id : ForeignKey<Merchant['id']>
-    declare transaction_id : ForeignKey<MerchantWalletModel['id']>
+    // declare transaction_id : ForeignKey<MerchantWalletModel['id']>
     declare approved_by : ForeignKey<Admin['id']>
 }
 

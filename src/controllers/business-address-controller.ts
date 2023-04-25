@@ -26,6 +26,7 @@ class BusinessController {
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_NOT_FOUND))
 
         body.merchant_id = id
+        body.business = business.id
         const data = await businessAddressService.create(body);
         return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_CREATION_FAILED));
     }
