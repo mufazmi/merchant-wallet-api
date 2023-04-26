@@ -2,7 +2,7 @@ import MerchantFund from "../models/merchant-funds"
 import { InferCreationAttributes, InferAttributes } from 'sequelize';
 class MerchantFundService{
 
-    create = async (data:InferCreationAttributes<MerchantFund>) => await MerchantFund.create(data);
+    create = async (data:InferCreationAttributes<MerchantFund>) => await MerchantFund.create(data,{logging:true});
 
     findOne = async (filter:any) => await MerchantFund.findOne({where:filter});
 
