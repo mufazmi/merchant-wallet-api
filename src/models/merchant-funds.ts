@@ -11,7 +11,7 @@ class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferC
     declare status: string
     declare remark: string
     declare merchant_id : ForeignKey<Merchant['id']>
-    // declare transaction_id : ForeignKey<MerchantWalletModel['id']>
+    declare transaction_id : ForeignKey<MerchantWalletModel['id']>
     declare approved_by : ForeignKey<Admin['id']>
 }
 
@@ -26,16 +26,15 @@ MerchantFundModel.init({
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    
-    remark: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     status: {
         type: DataTypes.STRING,
         values: [Constants.STATUS.PENDING, Constants.STATUS.APPROVED, Constants.STATUS.REJECTED],
         defaultValue: Constants.STATUS.PENDING
-    }
+    },
+    remark: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 }, {
     tableName: 'merchant_funds',
     underscored: true,
