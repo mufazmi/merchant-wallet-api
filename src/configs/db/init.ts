@@ -17,6 +17,7 @@ import MerchantWalletTransactionModel from "../../models/merchant-wallet-transac
 import BusinessModel from "../../models/business-model";
 import KycDocumentModel from "../../models/kyc-document-model";
 import BusinessAddressModel from "../../models/business-address-model";
+import insert from './test';
 require('./db')
 
 const isDev = config.APP_ENV === 'development'
@@ -24,11 +25,11 @@ console.log("config.APP_ENV === 'development'",config.APP_ENV === 'development')
 
 const dbInit = async () =>{
 
-    // await Admin.sync({alter:isDev})
-    // await Merchant.sync({alter:isDev})
+    await Admin.sync({alter:isDev})
+    await Merchant.sync({alter:isDev})
     await Otp.sync({alter:isDev})
-    // await MessageTemplateModel.sync({alter:isDev})
-    // await CountryModel.sync({alter:isDev})
+    await MessageTemplateModel.sync({alter:isDev})
+    await CountryModel.sync({alter:isDev})
     await StateModel.sync({alter:isDev})
     await CityModel.sync({alter:isDev})
     await NotificationTokenModel.sync({alter:isDev})
@@ -45,6 +46,8 @@ const dbInit = async () =>{
     await BusinessModel.sync({alter:isDev})
     await BusinessAddressModel.sync({alter:isDev})
     await KycDocumentModel.sync({alter:isDev})
+
+    // await insert();  
 }
 
 export default dbInit
