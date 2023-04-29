@@ -25,10 +25,6 @@ AdminWalletTransactionModel.init({
         primaryKey: true,
         allowNull: false
     },
-    // order: {
-    //     type: DataTypes.STRING,
-    //     allowNull: false
-    // },
     type: {
         type: DataTypes.ENUM,
         values: [Constants.WALLET.TYPE_POOL, Constants.WALLET.TYPE_WALLET],

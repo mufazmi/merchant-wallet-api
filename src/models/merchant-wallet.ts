@@ -8,7 +8,6 @@ class MerchantWalletModel extends Model<InferAttributes<MerchantWalletModel>, In
     declare pg_balance: number
     declare balance: number
     declare hold_balance: number
-    
     declare status: string
     declare merchant_id : ForeignKey<Merchant['id']>
 }

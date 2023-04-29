@@ -5,7 +5,7 @@ import Merchant from './merchant-model';
 import MerchantWalletModel from './merchant-wallet';
 import Admin from './admin-model';
 
-class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferCreationAttributes<MerchantFundModel, {omit:'id'}>> {
+class MerchantFundModel extends Model<InferAttributes<MerchantFundModel>, InferCreationAttributes<MerchantFundModel>> {
     declare id: CreationOptional<string>
     declare amount: number
     declare status: string
@@ -26,15 +26,15 @@ MerchantFundModel.init({
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    status: {
-        type: DataTypes.STRING,
-        values: [Constants.STATUS.PENDING, Constants.STATUS.APPROVED, Constants.STATUS.REJECTED],
-        defaultValue: Constants.STATUS.PENDING
-    },
     remark: {
         type: DataTypes.STRING,
         allowNull: true
     },
+    status: {
+        type: DataTypes.STRING,
+        values: [Constants.STATUS.PENDING, Constants.STATUS.APPROVED, Constants.STATUS.REJECTED],
+        defaultValue: Constants.STATUS.PENDING
+    }
 }, {
     tableName: 'merchant_funds',
     underscored: true,

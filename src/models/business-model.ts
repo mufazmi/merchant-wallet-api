@@ -14,7 +14,6 @@ class BusinessModel extends Model<InferAttributes<BusinessModel>, InferCreationA
     declare aadhar_number: number
     declare pan_number: number
     declare registered_number: string
-    // declare relation_ship_manager_name: string
     declare kyc_status: string
     declare merchant_id: ForeignKey<Merchant['id']>
 }
@@ -73,11 +72,8 @@ BusinessModel.init({
     sequelize: db
 });
 
-
-
 BusinessModel.hasOne(BusinessAddressModel, { sourceKey: 'id', foreignKey: 'business_id', as: 'address' })
 
 BusinessAddressModel.belongsTo(BusinessModel, { foreignKey: 'business_id', as: 'address' })
-
 
 export default BusinessModel

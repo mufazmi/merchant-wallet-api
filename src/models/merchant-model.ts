@@ -4,9 +4,9 @@ import bcrypt from 'bcryptjs';
 import Otp from './otp-model';
 import Constants from '../utils/constants';
 import MerchantWalletModel from './merchant-wallet';
+import BusinessModel from './business-model';
 import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
-import BusinessModel from './business-model';
 import KycDocumentModel from './kyc-document-model';
 import BusinessAddressModel from './business-address-model';
 
@@ -77,8 +77,8 @@ Merchant.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: [Constants.TYPE.KYC_PENDING, Constants.TYPE.KYC_SUBMITTED, Constants.TYPE.ACTIVE, Constants.TYPE.SUSPENDED],
-        defaultValue: Constants.TYPE.KYC_PENDING
+        values: [Constants.TYPE.PENDING, Constants.TYPE.SUBMITTED, Constants.TYPE.ACTIVE, Constants.TYPE.REJECTED],
+        defaultValue: Constants.TYPE.PENDING
     },
     lockType: {
         type: DataTypes.ENUM,
@@ -116,7 +116,7 @@ Merchant.hasOne(MerchantWalletModel, { sourceKey: 'id', foreignKey: 'merchant_id
 
 Merchant.hasOne(BusinessModel, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'business' });
 
-// BusinessModel.belongsTo(Merchant, { foreignKey: 'merchant_id', as: 'business' });
+BusinessModel.belongsTo(Merchant, { foreignKey: 'merchant_id', as: 'business' });
 
 Merchant.hasMany(MerchantFundModel, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'merchant_fund' });
 

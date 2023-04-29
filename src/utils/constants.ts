@@ -55,9 +55,11 @@ class Constants {
       REJECTED:'rejected',
    }
 
+
    static TYPE = {
-      KYC_PENDING: 'kyc_pending',
-      KYC_SUBMITTED: 'kyc_submitted',
+      PENDING: 'pending',
+      SUBMITTED: 'submitted',
+      REJECTED: 'rejected',
       ACTIVE: 'active',
       SUSPENDED: 'suspended',
    }
