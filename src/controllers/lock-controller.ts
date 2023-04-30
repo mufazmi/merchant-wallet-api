@@ -7,6 +7,7 @@ import responseSuccess from "../utils/response";
 import lockValidation from "../validations/lock-validation";
 import express,{Request,Response,NextFunction} from "express";
 import { AuthRequest } from "../interfaces/interface";
+import Res from "../utils/response";
 
 class LockController{
 
@@ -19,7 +20,7 @@ class LockController{
         body.user_id = user.id
         body.status = 'enabled'
         const data = await lockService.create(body);
-        return data ? responseSuccess({ res: res, message: "Lock Set" }) : next(ErrorHandler.serverError("Not Set"))
+        return data ? Res.success({ res: res, message: "Lock Set" }) : next(ErrorHandler.serverError("Not Set"))
     }
 
     verifyLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -42,7 +43,7 @@ class LockController{
         
         //Find token and update the payload locked=false
         
-        return lock ? responseSuccess({ res: res, message: "Password Set" }) : next(ErrorHandler.serverError("Not Set"))
+        return lock ? Res.success({ res: res, message: "Password Set" }) : next(ErrorHandler.serverError("Not Set"))
     }
 
     updateLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -58,7 +59,7 @@ class LockController{
         delete body.new_pin
         const data = await lockService.update({ id: mUser!.id }, body);
 
-        return data ? responseSuccess({ res: res, message: "Lock Updated" }) : next(ErrorHandler.serverError("Lock Update Failed"))
+        return data ? Res.success({ res: res, message: "Lock Updated" }) : next(ErrorHandler.serverError("Lock Update Failed"))
     }
 
     deleteLock = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -73,7 +74,7 @@ class LockController{
 
         const data = await lockService.destroy({ id: mUser!.id });
 
-        return data ? responseSuccess({ res: res, message: "Lock Removed" }) : next(ErrorHandler.serverError("Lock Removed Failed"))
+        return data ? Res.success({ res: res, message: "Lock Removed" }) : next(ErrorHandler.serverError("Lock Removed Failed"))
     }
 
 

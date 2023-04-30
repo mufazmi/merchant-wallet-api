@@ -10,6 +10,7 @@ import BusinessAddressModel from "../models/business-address-model";
 import Constants from "../utils/constants";
 import BusinessModel from "../models/business-model";
 import businessService from "../services/business-service";
+import Res from "../utils/response";
 
 
 class BusinessController {
@@ -28,13 +29,13 @@ class BusinessController {
         body.merchant_id = id
         body.business = business.id
         const data = await businessAddressService.create(body);
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_CREATION_FAILED));
     }
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
         const data = await businessAddressService.findOne({ merchant_id: id });
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_ADDRESS_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_ADDRESS_NOT_FOUND));
 
     }
 
@@ -47,7 +48,7 @@ class BusinessController {
         // if (businessAddress.kyc_status === Constants.TYPE.ACTIVE)
         //     return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
         const data = await businessAddressService.update({ id: businessAddress.id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_ADDRESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_ADDRESS_UPDATE_FAILED));
     }
 
 }

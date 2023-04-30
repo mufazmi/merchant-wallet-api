@@ -5,6 +5,7 @@ import Constants from "../utils/constants";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import messageTemplateService from "../services/message-template-service";
+import Res from "../utils/response";
 
 
 class MessageTemplateController {
@@ -12,19 +13,19 @@ class MessageTemplateController {
     create = async (req: Request, res: Response, next: NextFunction) => {
         const body = await otpTemplateValidation.create.validateAsync(req.body);
         const data = await messageTemplateService.create(body);
-        return data ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_CREATED }) : next(ErrorHandler.serverError(Messages.MESSAGE.TEMPLATE_MESSAGE_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_CREATED }) : next(ErrorHandler.serverError(Messages.MESSAGE.TEMPLATE_MESSAGE_CREATION_FAILED));
     }
 
     findOne = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await messageTemplateService.findAll({ id });
-        return data ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
 
     }
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await messageTemplateService.findAll({});
-        return data.length > 1 ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
+        return data.length > 1 ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
@@ -35,14 +36,14 @@ class MessageTemplateController {
             return next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND))
 
         const data = await messageTemplateService.update({ id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_UPDATED }) : next(ErrorHandler.serverError(Messages.MESSAGE.TEMPLATE_MESSAGE_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_UPDATED }) : next(ErrorHandler.serverError(Messages.MESSAGE.TEMPLATE_MESSAGE_UPDATE_FAILED));
     }
 
 
     destroy = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await messageTemplateService.destroy({id});
-        return data ? responseSuccess({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_DELATED }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_DELETE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_DELATED }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_DELETE_FAILED));
     }
 }
 

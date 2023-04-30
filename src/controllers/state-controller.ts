@@ -4,6 +4,7 @@ import responseSuccess from "../utils/response";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import stateService from "../services/state-service";
+import Res from "../utils/response";
 
 
 class StateController {
@@ -11,19 +12,19 @@ class StateController {
     create = async (req: Request, res: Response, next: NextFunction) => {
         const body = await stateValidation.create.validateAsync(req.body);
         const data = await stateService.create(body);
-        return data ? responseSuccess({ res: res, message: Messages.STATE.STATE_CREATED }) : next(ErrorHandler.serverError(Messages.STATE.STATE_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.STATE.STATE_CREATED }) : next(ErrorHandler.serverError(Messages.STATE.STATE_CREATION_FAILED));
     }
 
     findOne = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await stateService.findAll({ id });
-        return data ? responseSuccess({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
 
     }
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await stateService.findAll({});
-        return data.length > 0 ? responseSuccess({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
+        return data.length > 0 ? Res.success({ res: res, message: Messages.STATE.STATE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
@@ -34,14 +35,14 @@ class StateController {
             return next(ErrorHandler.notFound(Messages.STATE.STATE_NOT_FOUND))
 
         const data = await stateService.update({ id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.STATE.STATE_UPDATED }) : next(ErrorHandler.serverError(Messages.STATE.STATE_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.STATE.STATE_UPDATED }) : next(ErrorHandler.serverError(Messages.STATE.STATE_UPDATE_FAILED));
     }
 
 
     destroy = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await stateService.destroy({id});
-        return data ? responseSuccess({ res: res, message: Messages.STATE.STATE_DELATED }) : next(ErrorHandler.notFound(Messages.STATE.STATE_DELETE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.STATE.STATE_DELATED }) : next(ErrorHandler.notFound(Messages.STATE.STATE_DELETE_FAILED));
     }
 }
 

@@ -4,6 +4,7 @@ import responseSuccess from "../utils/response";
 import ErrorHandler from "../utils/error-handler";
 import Messages from '../utils/messages';
 import countryService from "../services/country-service";
+import Res from "../utils/response";
 
 
 class CountryController {
@@ -11,19 +12,19 @@ class CountryController {
     create = async (req: Request, res: Response, next: NextFunction) => {
         const body = await countryValidation.create.validateAsync(req.body);
         const data = await countryService.create(body);
-        return data ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_CREATED }) : next(ErrorHandler.serverError(Messages.COUNTRY.COUNTRY_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.COUNTRY.COUNTRY_CREATED }) : next(ErrorHandler.serverError(Messages.COUNTRY.COUNTRY_CREATION_FAILED));
     }
 
     findOne = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await countryService.findAll({ id });
-        return data ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
 
     }
 
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await countryService.findAll({});
-        return data.length > 0 ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
+        return data.length > 0 ? Res.success({ res: res, message: Messages.COUNTRY.COUNTRY_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND));
     }
 
     update = async (req: Request, res: Response, next: NextFunction) => {
@@ -34,14 +35,14 @@ class CountryController {
             return next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_NOT_FOUND))
 
         const data = await countryService.update({ id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_UPDATED }) : next(ErrorHandler.serverError(Messages.COUNTRY.COUNTRY_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.COUNTRY.COUNTRY_UPDATED }) : next(ErrorHandler.serverError(Messages.COUNTRY.COUNTRY_UPDATE_FAILED));
     }
 
 
     destroy = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
         const data = await countryService.destroy({id});
-        return data ? responseSuccess({ res: res, message: Messages.COUNTRY.COUNTRY_DELATED }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_DELETE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.COUNTRY.COUNTRY_DELATED }) : next(ErrorHandler.notFound(Messages.COUNTRY.COUNTRY_DELETE_FAILED));
     }
 }
 

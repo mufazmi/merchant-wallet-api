@@ -2,16 +2,18 @@ import { Request, Response, NextFunction } from 'express';
 import authValidation from '../validations/auth-validation';
 import ErrorHandler from '../utils/error-handler';
 import Messages from '../utils/messages';
-import responseSuccess from '../utils/response';
+
 import otpService from '../services/otp-service';
 import tokenService from '../services/token-service';
 import Constants from '../utils/constants';
 import MerchantDto from '../dtos/merchant-dto';
 import merchantService from '../services/merchant-service';
+import Res from '../utils/response';
 
 class AuthController {
 
     login = async (req: Request, res: Response, next: NextFunction) => {
+        let needToSendOtp = true;
         const body = await authValidation.login.validateAsync(req.body);
 
         const merchant = await merchantService.findOne({ mobile: body.mobile })
@@ -21,6 +23,14 @@ class AuthController {
         // const isMatched: boolean = merchantService.verifyPassword(body.password, merchant.password);
         // if (!isMatched)
         //     return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
+
+
+        if(merchant.device_id === body.device_id)
+            needToSendOtp = true;
+
+        if (merchant.status === Constants.TYPE.SUSPENDED || merchant.status === Constants.TYPE.BLOCKED)
+            return next(ErrorHandler.forbidden(Messages.AUTH.ACCESS_DENIED))
+        
 
         const tokenPayload = {
             id: merchant.id,
@@ -35,7 +45,8 @@ class AuthController {
             accessToken,
             refreshToken
         }
-        return responseSuccess({ res, message: Messages.AUTH.LOGIN_SUCCESS, data: response })
+
+        return Res.success({ res, message: Messages.AUTH.LOGIN_SUCCESS, data: response })
     }
 
     verify = async (req: Request, res: Response, next: NextFunction) => {
@@ -81,10 +92,10 @@ class AuthController {
                 refreshToken
             }
 
-            return responseSuccess({ res, message: Messages.AUTH.LOGIN_SUCCESS, data: response })
+            return Res.success({ res, message: Messages.AUTH.LOGIN_SUCCESS, data: response })
         }
 
-        return responseSuccess({ res, message: Messages.AUTH.ACCOUNT_VERIFIED })
+        return Res.success({ res, message: Messages.AUTH.ACCOUNT_VERIFIED })
 
     }
 

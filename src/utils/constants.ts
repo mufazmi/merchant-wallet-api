@@ -62,6 +62,7 @@ class Constants {
       REJECTED: 'rejected',
       ACTIVE: 'active',
       SUSPENDED: 'suspended',
+      BLOCKED: 'blocked'
    }
 
    static LOCK = {

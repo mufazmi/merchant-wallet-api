@@ -10,6 +10,7 @@ import KycDocumentModel from "../models/kyc-document-model";
 import fs from 'fs'
 import merchantService from "../services/merchant-service";
 import Constants from "../utils/constants";
+import Res from "../utils/response";
 
 class KycDocumentController {
 
@@ -53,13 +54,13 @@ class KycDocumentController {
         const data = await kycDocumentService.create(payload);
         if(data)
             merchantService.update({id},{status:Constants.TYPE.SUBMITTED})
-        return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
     }
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
         const data = await kycDocumentService.findOne({ merchant_id: id });
-        return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.KYC.DOCUMENT_KYC_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.KYC.DOCUMENT_KYC_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.KYC.DOCUMENT_KYC_NOT_FOUND));
 
     }
 
@@ -71,7 +72,7 @@ class KycDocumentController {
             return next(ErrorHandler.notFound(Messages.KYC.DOCUMENT_KYC_NOT_FOUND))
 
         const data = await kycDocumentService.update({ id: kycDocument.id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.KYC.DOCUMENT_KYC_UPDATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.KYC.DOCUMENT_KYC_UPDATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_UPDATE_FAILED));
     }
 
 }

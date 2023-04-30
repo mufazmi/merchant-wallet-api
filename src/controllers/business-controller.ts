@@ -8,6 +8,7 @@ import { AuthRequest } from "../interfaces/interface";
 import { InferAttributes } from "sequelize";
 import BusinessModel from "../models/business-model";
 import Constants from "../utils/constants";
+import Res from "../utils/response";
 
 
 class BusinessController {
@@ -20,13 +21,13 @@ class BusinessController {
             return next(ErrorHandler.forbidden(Messages.BUSINESS.BUSINESS_ALREADY_CREATED))
         body.merchant_id = id
         const data = await businessService.create(body);
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_CREATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_CREATION_FAILED));
     }
 
     findOne = async (req: AuthRequest, res: Response, next: NextFunction) => {
         const { id } = req.merchant;
         const data = await businessService.findOne({ merchant_id: id });
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND));
 
     }
 
@@ -39,7 +40,7 @@ class BusinessController {
         if (business.kyc_status === Constants.TYPE.ACTIVE)
             return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
         const data = await businessService.update({ id: business.id }, body);
-        return data ? responseSuccess({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));
+        return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));
     }
 
 }

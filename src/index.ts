@@ -27,7 +27,7 @@ app.use(express.static('public'));
 app.use('/api/v1',mainRoute);
 
 // app.get('/',(req:Request,res:Response,next:NextFunction)=>{
-//     return responseSuccess({res,message:'EgPaid Merchat Api',data:{
+//     return Res.success({res,message:'EgPaid Merchat Api',data:{
 //         name:'EgPaid',
 //         type:'Merchant',
 //         status: 'ok'

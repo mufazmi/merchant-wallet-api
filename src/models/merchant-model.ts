@@ -20,6 +20,7 @@ class Merchant extends Model<InferAttributes<Merchant>, InferCreationAttributes<
     declare role: string
     declare accountId: string
     declare coordinates: string
+    declare device_id: string
     declare status: string
     declare lockType: string
     declare passCode: string
@@ -67,6 +68,10 @@ Merchant.init({
         type: DataTypes.STRING(500),
         allowNull: false,
     },
+    device_id: {
+        type: DataTypes.STRING(500),
+        allowNull: false,
+    },
     isEmailVerified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -77,7 +82,7 @@ Merchant.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: [Constants.TYPE.PENDING, Constants.TYPE.SUBMITTED, Constants.TYPE.ACTIVE, Constants.TYPE.REJECTED],
+        values: [Constants.TYPE.PENDING, Constants.TYPE.SUBMITTED, Constants.TYPE.ACTIVE, Constants.TYPE.REJECTED,Constants.TYPE.SUSPENDED,Constants.TYPE.BLOCKED],
         defaultValue: Constants.TYPE.PENDING
     },
     lockType: {
