@@ -7,6 +7,15 @@ class Constants {
       ROLE_OPERATOR: 'Operator'
    }
 
+   static CODE = {
+      ONE: '01',
+      TWO: '02',
+      THREE: '03',
+      FOUR: '04',
+      FIVE: '05',
+      SIX: '06'
+   }
+
    static ENTITY = {
       TYPE_TEST: 'test'
    }
@@ -18,12 +27,12 @@ class Constants {
    // }
 
    static PATH = {
-      KYC_IMAGE : './storage/uploads/kyc/images/'
+      KYC_IMAGE: './storage/uploads/kyc/images/'
    }
 
    static USER = {
-      TYPE_ADMIN : 'admin',
-      TYPE_MERCHANT : 'merchant'
+      TYPE_ADMIN: 'admin',
+      TYPE_MERCHANT: 'merchant'
    }
 
    static SERVER_MESSAGE = {
@@ -49,21 +58,17 @@ class Constants {
    static STATUS = {
       ENABLE: 'enable',
       DISABLE: 'disable',
-      FREEZ:'freez',
-      APPROVED:'approved',
-      PENDING:'pending',
-      REJECTED:'rejected',
-   }
-
-
-   static TYPE = {
+      FREEZ: 'freez',
+      APPROVED: 'approved',
       PENDING: 'pending',
-      SUBMITTED: 'submitted',
       REJECTED: 'rejected',
+      SUBMITTED: 'submitted',
       ACTIVE: 'active',
       SUSPENDED: 'suspended',
       BLOCKED: 'blocked'
    }
+
+
 
    static LOCK = {
       NOTHING: 'no_lock',
@@ -75,21 +80,21 @@ class Constants {
    static WALLET = {
       TYPE_POOL: 'pool',
       TYPE_WALLET: 'wallet',
-      WALLET_NOT_FOUND : 'No Wallet Found'
+      WALLET_NOT_FOUND: 'No Wallet Found'
    }
 
 
    static TRANSACTION = {
-      CREATION_FAILED : 'Failed To Create This Transaction',
+      CREATION_FAILED: 'Failed To Create This Transaction',
       TYPE_DEBIT: 'debit',
       TYPE_CREDIT: 'credit',
       TYPE_DEPOSIT: 'deposit',
       TYPE_PURCHASE: 'purchase',
-      TYPE_NOT_CREDIT : 'Not A Credit Transaction',
-      TYPE_NOT_DEBIT : 'Not A Debit Transaction',
+      TYPE_NOT_CREDIT: 'Not A Credit Transaction',
+      TYPE_NOT_DEBIT: 'Not A Debit Transaction',
       STATUS_SUCCESS: 'success',
       STATUS_FAILED: 'failed',
-      
+
    }
 }
 

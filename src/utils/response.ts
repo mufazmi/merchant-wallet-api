@@ -1,9 +1,10 @@
 import { Response } from "express"
 import Constants from "./constants"
 
+
 interface iResponseSuccess {
     res: Response,
-    status_code?: number,
+    status_code?: string,
     message: string,
     data?: any
 }

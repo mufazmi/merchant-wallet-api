@@ -9,11 +9,14 @@ import Constants from '../utils/constants';
 import MerchantDto from '../dtos/merchant-dto';
 import merchantService from '../services/merchant-service';
 import Res from '../utils/response';
+import { DataTypes } from 'sequelize';
+import lockService from '../services/lock-service';
 
 class AuthController {
 
     login = async (req: Request, res: Response, next: NextFunction) => {
-        let needToSendOtp = true;
+        let isOtp = false;
+        let isLocked = false;
         const body = await authValidation.login.validateAsync(req.body);
 
         const merchant = await merchantService.findOne({ mobile: body.mobile })
@@ -24,23 +27,41 @@ class AuthController {
         // if (!isMatched)
         //     return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
 
-        if (merchant.status === Constants.TYPE.SUSPENDED || merchant.status === Constants.TYPE.BLOCKED)
+        if (merchant.status === Constants.STATUS.SUSPENDED || merchant.status === Constants.STATUS.BLOCKED)
             return next(ErrorHandler.forbidden(Messages.AUTH.ACCESS_DENIED))
 
+        if (merchant.device_id != body.device_id) {
+            isOtp = true
+            const otp = otpService.generateOtp();
+            const otpPayload = {
+                otp,
+                type: Constants.OTP_TYPE.MOBILE_VERIFICATION,
+                merchant_id: merchant.id
+            }
+            const otpRes = await otpService.createOtp(otpPayload);
+            if (!otpRes)
+                return next(ErrorHandler.serverError(Constants.SERVER_MESSAGE.SERVER_ERROR));
+            const response = {
+                reference_id: otpRes.id,
+            }
+            return Res.success({ res: res, status_code: Constants.CODE.TWO, message: Messages.OTP.SENT, data: response });
+        }
 
-        // if (merchant.device_id != body.device_id)
-        // {
-        //     const otpPayload = {
-                
-        //     }
-        //     otpService.createOtp({});
-        // }
+        const lock = await lockService.findOne({merchant_id:merchant.id});
+
+        if(lock && lock.status == Constants.STATUS.ENABLE){
+            isLocked = true
+            if(lock.status === Constants.STATUS.BLOCKED){
+
+            }
+
+        }
 
         const tokenPayload = {
             id: merchant.id,
             name: merchant.name,
             mobile: merchant.mobile,
-            auth: false
+            lock: isLocked
         }
 
         const { accessToken, refreshToken } = tokenService.generateToken(tokenPayload);

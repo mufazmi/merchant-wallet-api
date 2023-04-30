@@ -37,7 +37,7 @@ class BusinessController {
         const business = await businessService.findOne({ merchant_id: id });
         if (!business)
             return next(ErrorHandler.notFound(Messages.BUSINESS.BUSINESS_NOT_FOUND))
-        if (business.kyc_status === Constants.TYPE.ACTIVE)
+        if (business.kyc_status === Constants.STATUS.ACTIVE)
             return next(ErrorHandler.notFound(Messages.KYC.KYC_ACTIVE))
         const data = await businessService.update({ id: business.id }, body);
         return data ? Res.success({ res: res, message: Messages.BUSINESS.BUSINESS_UPDATED }) : next(ErrorHandler.serverError(Messages.BUSINESS.BUSINESS_UPDATE_FAILED));

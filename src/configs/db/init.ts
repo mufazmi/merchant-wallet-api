@@ -18,6 +18,7 @@ import BusinessModel from "../../models/business-model";
 import KycDocumentModel from "../../models/kyc-document-model";
 import BusinessAddressModel from "../../models/business-address-model";
 import insert from './test';
+import Lock from "../../models/lock-model";
 require('./db')
 
 const isDev = config.APP_ENV === 'development'
@@ -46,6 +47,7 @@ const dbInit = async () =>{
     await BusinessModel.sync({alter:isDev})
     await BusinessAddressModel.sync({alter:isDev})
     await KycDocumentModel.sync({alter:isDev})
+    await Lock.sync({alter:isDev})
     
     // await insert();  
 }

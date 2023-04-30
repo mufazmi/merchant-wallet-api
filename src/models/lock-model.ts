@@ -5,7 +5,7 @@ import Merchant from './merchant-model';
 
 class Lock extends Model<InferAttributes<Lock>, InferCreationAttributes<Lock>> {
     declare id: CreationOptional<string>
-    declare user_id: ForeignKey<Merchant['id']>
+    declare merchant_id: ForeignKey<Merchant['id']>
     declare pin: CreationOptional<string>
     declare status: string;
     declare blocked_at: Date
@@ -32,8 +32,8 @@ Lock.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: ["disabled", "enable", "blocked"],
-        defaultValue: "disabled"
+        values: [Constants.STATUS.DISABLE, Constants.STATUS.ENABLE, Constants.STATUS.BLOCKED],
+        defaultValue: Constants.STATUS.DISABLE
     },
     blocked_at: {
         type: DataTypes.DATE,

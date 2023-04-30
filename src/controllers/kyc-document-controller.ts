@@ -53,7 +53,7 @@ class KycDocumentController {
 
         const data = await kycDocumentService.create(payload);
         if(data)
-            merchantService.update({id},{status:Constants.TYPE.SUBMITTED})
+            merchantService.update({id},{status:Constants.STATUS.SUBMITTED})
         return data ? Res.success({ res: res, message: Messages.KYC.DOCUMENT_KYC_CREATED }) : next(ErrorHandler.serverError(Messages.KYC.DOCUMENT_KYC_CREATION_FAILED));
     }
 

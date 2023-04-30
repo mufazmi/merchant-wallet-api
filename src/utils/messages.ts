@@ -10,7 +10,11 @@ class Messages {
         INVALID_PASSWORD: "Invalid Password",
         INVALID_OTP: "Invalid OTP",
         INVALID_ACCESS_TOKEN: "Invalid Authorization",
-        ACCESS_DENIED : "Access Denied"
+        ACCESS_DENIED: "Access Denied"
+    }
+
+    static OTP = {
+        SENT: 'An Otp sent to your mobile number'
     }
 
     static MESSAGE = {
@@ -67,7 +71,7 @@ class Messages {
         DOCUMENT_KYC_UPDATE_FAILED: 'Failed To Updated Kyc Document',
         DOCUMENT_KYC_DELATED: 'Kyc Document Deleted',
         DOCUMENT_KYC_DELETE_FAILED: 'Failed To Delete Kyc Document',
-        KYC_ACTIVE : 'Your kyc status is Active'
+        KYC_ACTIVE: 'Your kyc status is Active'
     }
 
     static BUSINESS = {
@@ -81,7 +85,7 @@ class Messages {
         BUSINESS_DELATED: 'Business Deleted',
         BUSINESS_DELETE_FAILED: 'Failed To Delete Business',
 
-        
+
         BUSINESS_ADDRESS_CREATED: 'Business Address Created Successfully',
         BUSINESS_ADDRESS_ALREADY_CREATED: 'Business Address Already Added',
         BUSINESS_ADDRESS_CREATION_FAILED: 'Failed To Create Business Address',

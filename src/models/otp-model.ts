@@ -6,7 +6,6 @@ import Admin from './admin-model';
 class Otp extends Model<InferAttributes<Otp>,InferCreationAttributes<Otp>> {
     declare id:CreationOptional<string>
     declare otp:string
-    declare reference_id:string
     declare type:CreationOptional<string>
     // declare setAdmin: HasManyAddAssociationMixin<Admin, string>;
     declare userId: ForeignKey<Admin['id']>
@@ -20,10 +19,6 @@ Otp.init({
         allowNull:false
     },
     otp:{
-        type:DataTypes.STRING(6),
-        allowNull:false
-    },
-    reference_id:{
         type:DataTypes.STRING(6),
         allowNull:false
     },

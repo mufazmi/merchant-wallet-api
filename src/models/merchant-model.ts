@@ -9,6 +9,7 @@ import MerchantFundModel from './merchant-funds';
 import AdminWalletModel from './admin-wallet';
 import KycDocumentModel from './kyc-document-model';
 import BusinessAddressModel from './business-address-model';
+import Lock from './lock-model';
 
 class Merchant extends Model<InferAttributes<Merchant>, InferCreationAttributes<Merchant>>{
 
@@ -82,8 +83,8 @@ Merchant.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: [Constants.TYPE.PENDING, Constants.TYPE.SUBMITTED, Constants.TYPE.ACTIVE, Constants.TYPE.REJECTED,Constants.TYPE.SUSPENDED,Constants.TYPE.BLOCKED],
-        defaultValue: Constants.TYPE.PENDING
+        values: [Constants.STATUS.PENDING, Constants.STATUS.SUBMITTED, Constants.STATUS.ACTIVE, Constants.STATUS.REJECTED,Constants.STATUS.SUSPENDED,Constants.STATUS.BLOCKED],
+        defaultValue: Constants.STATUS.PENDING
     },
     lockType: {
         type: DataTypes.ENUM,
@@ -130,5 +131,7 @@ Merchant.hasMany(AdminWalletModel, { sourceKey: 'id', foreignKey: 'approved_by',
 Merchant.hasOne(KycDocumentModel, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'kys_documents' });
 
 Merchant.hasOne(BusinessAddressModel, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'address' });
+
+Merchant.hasOne(Lock, { sourceKey: 'id', foreignKey: 'merchant_id', as: 'lock' });
 
 export default Merchant
