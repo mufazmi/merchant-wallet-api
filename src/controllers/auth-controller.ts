@@ -24,13 +24,17 @@ class AuthController {
         // if (!isMatched)
         //     return next(ErrorHandler.forbidden(Messages.AUTH.INVALID_PASSWORD))
 
-
-        if(merchant.device_id === body.device_id)
-            needToSendOtp = true;
-
         if (merchant.status === Constants.TYPE.SUSPENDED || merchant.status === Constants.TYPE.BLOCKED)
             return next(ErrorHandler.forbidden(Messages.AUTH.ACCESS_DENIED))
-        
+
+
+        // if (merchant.device_id != body.device_id)
+        // {
+        //     const otpPayload = {
+                
+        //     }
+        //     otpService.createOtp({});
+        // }
 
         const tokenPayload = {
             id: merchant.id,

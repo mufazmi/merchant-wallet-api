@@ -41,7 +41,7 @@ class StateController {
 
     destroy = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
-        const data = await stateService.destroy({id});
+        const data = await stateService.destroy({ id });
         return data ? Res.success({ res: res, message: Messages.STATE.STATE_DELATED }) : next(ErrorHandler.notFound(Messages.STATE.STATE_DELETE_FAILED));
     }
 }

@@ -3,6 +3,8 @@ import CountryModel from "../../models/country-model";
 import Merchant from "../../models/merchant-model";
 
 const insert = async () => {
+
+    // Add Admin
     try {
         const admin = await Admin.create({
             name: 'Umair Farooqui',
@@ -20,6 +22,7 @@ const insert = async () => {
         console.error(error);
     }
 
+    // Add Merchant
     try {
         const merchant = await Merchant.create({
             name: 'Umair Farooqui',
@@ -34,13 +37,14 @@ const insert = async () => {
             status: 'kyc_pending',
             lockType: 'no_lock',
             passCode: '123',
-
+            device_id: '5667876876'
         });
         console.log(merchant.toJSON()); // print the created merchant object
     } catch (error) {
         console.error(error);
     }
 
+    // Add Country
     try {
         const country = await CountryModel.create({
             name: 'INDIA',
