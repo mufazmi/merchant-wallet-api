@@ -1,6 +1,5 @@
 import Lock from "../models/lock-model"
-import { InferAttributes, InferCreationAttributes } from 'sequelize';
-import bcrypt from 'bcryptjs';
+import { InferCreationAttributes } from 'sequelize';
 
 
 class LockService {
@@ -9,11 +8,19 @@ class LockService {
 
     findOne = async (where: any) => await Lock.findOne({ where })
 
-    update = async (where: any, body: any) => await Lock.update(where, body)
+    update = async (where: any, body: any) => await Lock.update(body, { where: where })
 
-    incrementFailedAttempt = async (filter:{by:number}) => await Lock.increment('failed_attempt', {
+    incrementFailedAttempt1 = async (filter: { by: number }) => await Lock.increment('failed_attempt', {
         by: filter.by
     });
+
+    incrementFailedAttempt = async (filter: { by: number, merchant_id: string }) => await Lock.increment('failed_attempt', {
+        by: filter.by,
+        where: {
+            merchant_id: filter.merchant_id
+        }
+    });
+
 
     destroy = async (where: any) => await Lock.destroy({ where })
 

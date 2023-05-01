@@ -20,7 +20,7 @@ class MerchantService {
 
     block = async (filter: any) => {
         const now = moment();
-        const later = now.add(24, 'hours');
+        const later = now.clone().add(24, 'hours');
         return await Merchant.update({ is_blocked: true, blocked_at: now, unblocked_at: later }, { where: filter });
     }
 

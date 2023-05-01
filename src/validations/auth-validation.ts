@@ -22,12 +22,6 @@ class AuthValidation {
         otp: Joi.string().min(6).max(6).required(),
     });
 
-    unlock = Joi.object({
-        device_id : Joi.string().min(10).max(300).required(),
-        otp: Joi.string().min(6).max(6).required(),
-    });
-
-
 }
 
 export default new AuthValidation

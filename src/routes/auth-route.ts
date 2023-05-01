@@ -9,7 +9,6 @@ const router = express.Router();
 // router.post('/register',am(autController.register))
 router.post('/login',am(autController.login))
 router.post('/verify',am(autController.verify))
-router.post('/unlock',auth,am(autController.unlock))
 
 
 export default router;
