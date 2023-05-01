@@ -8,8 +8,6 @@ class Lock extends Model<InferAttributes<Lock>, InferCreationAttributes<Lock>> {
     declare merchant_id: ForeignKey<Merchant['id']>
     declare pin: CreationOptional<string>
     declare status: string;
-    declare blocked_at: Date
-    declare unblocked_at: Date
     declare failed_attempt: number;
 }
 
@@ -34,14 +32,6 @@ Lock.init({
         type: DataTypes.ENUM,
         values: [Constants.STATUS.DISABLE, Constants.STATUS.ENABLE, Constants.STATUS.BLOCKED],
         defaultValue: Constants.STATUS.DISABLE
-    },
-    blocked_at: {
-        type: DataTypes.DATE,
-        allowNull: true
-    },
-    unblocked_at: {
-        type: DataTypes.DATE,
-        allowNull: true
     }
 },
     {

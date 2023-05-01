@@ -20,19 +20,22 @@ app.use(express.json())
 //Main Route
 import mainRoute from './routes';
 import responseSuccess from './utils/response';
+import Res from './utils/response';
 
 // Serve static files from the public directory
 app.use(express.static('public'));
 
 app.use('/api/v1',mainRoute);
 
-// app.get('/',(req:Request,res:Response,next:NextFunction)=>{
-//     return Res.success({res,message:'EgPaid Merchat Api',data:{
-//         name:'EgPaid',
-//         type:'Merchant',
-//         status: 'ok'
-//     }})
-// })
+app.get('/',(req:Request,res:Response,next:NextFunction)=>{
+    return Res.success({res,message:'EgPaid Merchat Api',data:{
+        name:'EgPaid',
+        email:'info@egpaid.com',
+        type:'Merchant',
+        status: 'ok',
+        port : PORT
+    }})
+})
 
 
 // Not Found Middleware

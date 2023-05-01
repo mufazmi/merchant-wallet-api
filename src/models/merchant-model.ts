@@ -25,6 +25,9 @@ class Merchant extends Model<InferAttributes<Merchant>, InferCreationAttributes<
     declare status: string
     declare lockType: string
     declare passCode: string
+    declare is_blocked: boolean
+    declare blocked_at: Date
+    declare unblocked_at: Date
     declare isPhoneVerified: boolean
     declare isEmailVerified: boolean
     declare createOtp: HasManyAddAssociationMixin<Otp, 'user_id'>;
@@ -73,6 +76,18 @@ Merchant.init({
         type: DataTypes.STRING(500),
         allowNull: false,
     },
+    is_blocked: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    blocked_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    unblocked_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
     isEmailVerified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -83,7 +98,7 @@ Merchant.init({
     },
     status: {
         type: DataTypes.ENUM,
-        values: [Constants.STATUS.PENDING, Constants.STATUS.SUBMITTED, Constants.STATUS.ACTIVE, Constants.STATUS.REJECTED,Constants.STATUS.SUSPENDED,Constants.STATUS.BLOCKED],
+        values: [Constants.STATUS.PENDING, Constants.STATUS.SUBMITTED, Constants.STATUS.ACTIVE, Constants.STATUS.REJECTED, Constants.STATUS.SUSPENDED, Constants.STATUS.BLOCKED],
         defaultValue: Constants.STATUS.PENDING
     },
     lockType: {

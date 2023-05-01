@@ -17,10 +17,16 @@ class AuthValidation {
     });
 
     verify = Joi.object({
-        mobile : Joi.string().min(10).required(),
+        reference_id : Joi.string().min(10).max(100).required(),
+        device_id : Joi.string().min(10).max(300).required(),
         otp: Joi.string().min(6).max(6).required(),
-        token: Joi.string().optional(),
     });
+
+    unlock = Joi.object({
+        device_id : Joi.string().min(10).max(300).required(),
+        otp: Joi.string().min(6).max(6).required(),
+    });
+
 
 }
 

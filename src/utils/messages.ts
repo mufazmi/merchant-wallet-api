@@ -13,7 +13,13 @@ class Messages {
         ACCESS_DENIED: "Access Denied"
     }
 
+    static LOCK = {
+        NOT_FOUND : 'No Lock Set'
+    }
+
     static OTP = {
+        INVALID: 'Invalid OTP',
+        EXPIRED: 'OTP has been Expired',
         SENT: 'An Otp sent to your mobile number'
     }
 
