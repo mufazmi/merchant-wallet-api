@@ -1,7 +1,7 @@
 
 import Otp from "../../models/otp-model";
 import Admin from "../../models/admin-model";
-import CountryModel from "../../models/country-model";``
+import CountryModel from "../../models/country-model"; ``
 import MessageTemplateModel from "../../models/message-template-model";
 import config from "../config";
 import StateModel from "../../models/state-model";
@@ -19,12 +19,13 @@ import KycDocumentModel from "../../models/kyc-document-model";
 import BusinessAddressModel from "../../models/business-address-model";
 import insert from './test';
 import Lock from "../../models/lock-model";
+import Remitter from "../../models/remitter-model";
 require('./db')
 
 const isDev = config.APP_ENV === 'development'
-console.log("config.APP_ENV === 'development'",config.APP_ENV === 'development')
+console.log("config.APP_ENV === 'development'", config.APP_ENV === 'development')
 
-const dbInit = async () =>{
+const dbInit = async () => {
 
     // await Admin.sync({alter:isDev})
     // await Merchant.sync({alter:isDev})
@@ -48,7 +49,8 @@ const dbInit = async () =>{
     // await BusinessAddressModel.sync({alter:isDev})
     // await KycDocumentModel.sync({alter:isDev})
     // await Lock.sync({alter:isDev})
-    
+    await Remitter.sync({ alter: isDev });
+
     // await insert();  
 }
 

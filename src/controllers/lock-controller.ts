@@ -54,19 +54,13 @@ class LockController {
         const { merchant: auth } = req;
         const now = moment();
         const later = now.add(24, 'hours');
-
         const body = await lockValidation.unlock.validateAsync(req.body);
-
         const lock = await lockService.findOne({ merchant_id: auth.id });
-
         if (!lock)
             return next(ErrorHandler.notFound(Messages.LOCK.NOT_FOUND))
-
         const merchant = await merchantService.findOne({ id: lock.merchant_id });
-
         if (!merchant)
             return next(ErrorHandler.notFound(Messages.MERCHANT.MERCHANT_NOT_FOUND));
-
         if (merchant.is_blocked) {
             const now = moment();
             const unblockedAt = moment(merchant.unblocked_at);
@@ -85,14 +79,12 @@ class LockController {
                 await merchantService.update({ id: merchant.id }, { is_blocked: false })
             }
         }
-
         if (lock.status === Constants.STATUS.ENABLE) {
             if (body.code != lock.pin) {
                 if (lock.failed_attempt > 1) {
                     await merchantService.block({ id: lock.merchant_id })
                     await lockService.incrementFailedAttempt({ by: 1, merchant_id: lock.merchant_id });
                     const diff = moment(later).diff(moment(now));
-
                     return next(Res.error({
                         res: res, message: 'Your account is blocked', data: {
                             blocked_at: now,
