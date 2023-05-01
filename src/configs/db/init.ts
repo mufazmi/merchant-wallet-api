@@ -20,6 +20,7 @@ import BusinessAddressModel from "../../models/business-address-model";
 import insert from './test';
 import Lock from "../../models/lock-model";
 import Remitter from "../../models/remitter-model";
+import Recipient from "../../models/recipients-models";
 require('./db')
 
 const isDev = config.APP_ENV === 'development'
@@ -50,6 +51,7 @@ const dbInit = async () => {
     // await KycDocumentModel.sync({alter:isDev})
     // await Lock.sync({alter:isDev})
     await Remitter.sync({ alter: isDev });
+    await Recipient.sync({ alter: isDev });
 
     // await insert();  
 }
