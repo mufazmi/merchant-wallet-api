@@ -4,14 +4,14 @@ import db from "../configs/db/db";
 class Recipient extends Model<InferAttributes<Recipient>, InferCreationAttributes<Recipient>> {
     declare id: CreationOptional<string>
     declare customer_id: string
-    declare recipient_id: number
+    declare recipient_id: CreationOptional<number>
     declare bank_name: string
-    declare ifsc: string
-    declare branch: string
-    declare account: number
+    declare ifsc_code: string
+    declare branch: CreationOptional<string>
+    declare account_number: number
     declare recipient_name: string
-    declare recipient_mobile: number
-    declare status: string
+    declare recipient_mobile: CreationOptional<number>
+    declare status: CreationOptional<string>
 }
 
 Recipient.init({
@@ -27,21 +27,21 @@ Recipient.init({
     },
     recipient_id: {
         type: DataTypes.BIGINT,
-        allowNull: false
+        allowNull: true
     },
     bank_name: {
         type: DataTypes.STRING,
         allowNull: true
     },
-    ifsc: {
+    ifsc_code: {
         type: DataTypes.STRING,
         allowNull: false
     },
     branch: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
-    account: {
+    account_number: {
         type: DataTypes.BIGINT,
         allowNull: false
     },
@@ -51,7 +51,7 @@ Recipient.init({
     },
     recipient_mobile: {
         type: DataTypes.BIGINT,
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: DataTypes.ENUM,

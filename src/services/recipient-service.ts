@@ -1,4 +1,4 @@
-import Recipient from "../models/state-model"
+import Recipient from "../models/recipients-models"
 import { InferCreationAttributes, InferAttributes } from 'sequelize';
 class RecipientService{
 

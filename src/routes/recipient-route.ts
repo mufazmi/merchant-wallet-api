@@ -1,14 +1,13 @@
 import express from 'express';
-import remitterController from '../controllers/remitter-controller';
+import recipientController from '../controllers/recipient-controller';
 const am = require('../middlewares/async-middleware');
 
 const router = express.Router();
 
-router.post('/',am(remitterController.create))
-router.get('/',am(remitterController.findAll))
-router.get('/:id',am(remitterController.findOne))
-router.get('/search',am(remitterController.searchOne))
-router.patch('/:id',am(remitterController.update))
-router.delete('/:id',am(remitterController.destroy))
+router.post('/',am(recipientController.create))
+router.get('/',am(recipientController.findAll))
+router.get('/:id',am(recipientController.findOne))
+router.patch('/:id',am(recipientController.update))
+router.delete('/:id',am(recipientController.destroy))
 
 export default router;

@@ -53,7 +53,7 @@ const dbInit = async () => {
     await Remitter.sync({ alter: isDev });
     await Recipient.sync({ alter: isDev });
 
-    await insert();  
+    // await insert();  
 
 }
 

@@ -11,6 +11,8 @@ class RecipientController {
 
     create = async (req: Request, res: Response, next: NextFunction) => {
         const body = await recipientValidation.create.validateAsync(req.body);
+        // CONDITION
+        // CALL THE EKO RECIPIENT API IF RESPONSE IS SUCCESS THEN INSERT DATA IN RECIPEIENT TABLE
         const data = await recipientService.create(body);
         return data ? Res.success({ res: res, message: Messages.RECIPIENT.RECIPIENT_CREATED }) : next(ErrorHandler.serverError(Messages.RECIPIENT.RECIPIENT_CREATION_FAILED));
     }
