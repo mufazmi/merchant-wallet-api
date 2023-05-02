@@ -26,8 +26,8 @@ class Merchant extends Model<InferAttributes<Merchant>, InferCreationAttributes<
     declare lockType: string
     declare passCode: string
     declare is_blocked: boolean
-    declare blocked_at: Date
-    declare unblocked_at: Date
+    declare blocked_at: CreationOptional<Date>
+    declare unblocked_at: CreationOptional<Date>
     declare isPhoneVerified: boolean
     declare isEmailVerified: boolean
     declare createOtp: HasManyAddAssociationMixin<Otp, 'user_id'>;

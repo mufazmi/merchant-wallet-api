@@ -37,7 +37,8 @@ const insert = async () => {
             status: 'kyc_pending',
             lockType: 'no_lock',
             passCode: '123',
-            device_id: '5667876876'
+            device_id: '5667876876',
+            is_blocked:false,
         });
         console.log(merchant.toJSON()); // print the created merchant object
     } catch (error) {

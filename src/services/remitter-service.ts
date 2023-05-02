@@ -12,6 +12,7 @@ class RemitterService{
 
     destroy = async (filter:any) => await Remitter.destroy({where:filter});
     
+    
 }
 
 export default new RemitterService

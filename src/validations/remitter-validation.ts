@@ -14,6 +14,10 @@ class RemitterValidation {
         amount:Joi.number().min(1).optional()
     });
 
+    searchOne = Joi.object({        
+        mobile : Joi.string().min(10).max(13).required()
+    });
+
 }
 
 export default new RemitterValidation

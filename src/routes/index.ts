@@ -14,6 +14,7 @@ import notificationRoute from '../routes/notification-route';
 import auth from '../middlewares/auth-middleware';
 import businessRoute from './business-route';
 import lockRoute from './lock-route';
+import remitterRoute from './remitter-route';
 import businessAddressRoute from './business-address-route';
 import kycDocumentRoute from './kyc-document-route';
 
@@ -27,6 +28,7 @@ router.use('/state', stateRoute);
 router.use('/city', cityRoute);
 router.use('/lock',auth, lockRoute);
 router.use('/business',auth, businessRoute);
+router.use('/remitter',auth, remitterRoute);
 router.use('/business/address',auth, businessAddressRoute);
 router.use('/kyc/document',auth, kycDocumentRoute);
 // router.use('/notification', notificationRoute);

@@ -23,6 +23,13 @@ class RemitterController {
 
     }
 
+    searchOne = async (req: Request, res: Response, next: NextFunction) => {
+        const body = await remitterValidation.searchOne.validateAsync(req.body)
+        const data = await remitterService.findAll(body);
+        return data ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
+
+    }
+
     findAll = async (req: Request, res: Response, next: NextFunction) => {
         const data = await remitterService.findAll({});
         return data.length > 1 ? Res.success({ res: res, message: Messages.MESSAGE.TEMPLATE_MESSAGE_FOUND, data: data }) : next(ErrorHandler.notFound(Messages.MESSAGE.TEMPLATE_MESSAGE_NOT_FOUND));
