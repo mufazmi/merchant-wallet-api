@@ -8,7 +8,5 @@ router.post('/',am(remitterController.create))
 router.get('/',am(remitterController.findAll))
 router.get('/:id',am(remitterController.findOne))
 router.get('/search',am(remitterController.searchOne))
-router.patch('/:id',am(remitterController.update))
-router.delete('/:id',am(remitterController.destroy))
 
 export default router;
