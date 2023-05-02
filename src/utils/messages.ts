@@ -56,6 +56,17 @@ class Messages {
         STATE_DELETE_FAILED: 'Failed To Delete State'
     }
 
+    static RECIPIENT = {
+        RECIPIENT_CREATED: 'Recipient Created Successfully',
+        RECIPIENT_CREATION_FAILED: 'Failed To Create Recipient',
+        RECIPIENT_FOUND: 'Recipient Found',
+        RECIPIENT_NOT_FOUND: 'No Recipient Found',
+        RECIPIENT_UPDATED: 'Recipient Updated',
+        RECIPIENT_UPDATE_FAILED: 'Failed To Updated Recipient',
+        RECIPIENT_DELATED: 'Recipient Deleted',
+        RECIPIENT_DELETE_FAILED: 'Failed To Delete Recipient'
+    }
+
     static CITY = {
         CITY_CREATED: 'City Created Successfully',
         CITY_CREATION_FAILED: 'Failed To Create City',
