@@ -54,6 +54,7 @@ const dbInit = async () => {
     await Recipient.sync({ alter: isDev });
 
     await insert();  
+
 }
 
 export default dbInit
