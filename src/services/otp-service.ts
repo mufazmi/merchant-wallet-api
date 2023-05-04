@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import Otp from '../models/otp-model';
 import moment from 'moment';
+import smsService from './sms-service';
 
 class OtpService {
 
@@ -24,6 +25,10 @@ class OtpService {
         if (otp)
             await this.destroyOtp(filter);
         return otp ? otp : false;
+    };
+
+    sendOtp = async (data: {otp:string,mobile:string}) => {
+        return await smsService.sendOtp({otp:data.otp,mobile:data.mobile});
     };
 
 }

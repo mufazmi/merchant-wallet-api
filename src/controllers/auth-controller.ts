@@ -63,6 +63,7 @@ class AuthController {
             const otpRes = await otpService.storeOtp(otpPayload);
             if (!otpRes)
                 return next(ErrorHandler.serverError(Constants.SERVER_MESSAGE.SERVER_ERROR));
+            await otpService.sendOtp({otp:otp,mobile:body.mobile});
             const response = {
                 reference_id: otpRes.id,
             }
