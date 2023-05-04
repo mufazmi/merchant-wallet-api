@@ -24,7 +24,7 @@ class RemitterHttp {
   }
 
 
-  public async resetOtp(mobile: string): Promise<RemitterResponse | null> {
+  resendOtp = async (mobile: string): Promise<RemitterResponse | null> => {
     try {
       const url = `https://api.eko.in:25002/ekoicici/v2/customers/mobile_number:${mobile}/otp`;
       const data = qs.stringify({
@@ -39,7 +39,7 @@ class RemitterHttp {
     }
   }
 
-  public async getRemitters(mobile: string): Promise<RemitterResponse> {
+  getRemitters = async (mobile: string): Promise<RemitterResponse> => {
     try {
       const url = `https://api.eko.in:25002/ekoicici/v2/customers/mobile_number:${mobile}`;
       const data = qs.stringify({
