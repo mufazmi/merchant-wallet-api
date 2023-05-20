@@ -13,7 +13,7 @@ interface iSendOtp {
 class SmsService {
 
     sendOtp = async (data: iSendOtp) => {
-        const text = `EgPaid never calls you asking for OTP. Don't share your OTP with anyone. Your OTP is ${data.otp} Valid for 3 min, ID:78799gdg`;
+        const text = `SocialCodia never calls you asking for OTP. Don't share your OTP with anyone. Your OTP is ${data.otp} Valid for 3 min, ID:78799gdg`;
         const payload: iSendSms = {
             mobile: data.mobile,
             text

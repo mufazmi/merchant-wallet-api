@@ -1,9 +1,0 @@
-
-
-
-
-===FTP===
-HOST    :   tapnpe.com
-USER    :   tapnpeco@develop.tapnpe.com	
-PASS    :   +KxfV825uG8cK+
-PATH    :   /home/tapnpeco/testthree/	

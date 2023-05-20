@@ -28,9 +28,9 @@ app.use(express.static('public'));
 app.use('/api/v1',mainRoute);
 
 app.get('/',(req:Request,res:Response,next:NextFunction)=>{
-    return Res.success({res,message:'EgPaid Merchat Api',data:{
-        name:'EgPaid',
-        email:'info@egpaid.com',
+    return Res.success({res,message:'SocialCodia Merchat Api',data:{
+        name:'SocialCodia',
+        email:'info@SocialCodia.com',
         type:'Merchant',
         status: 'ok',
         port : PORT
